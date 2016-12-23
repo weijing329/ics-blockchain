@@ -1,0 +1,17 @@
+{
+  "default": {
+    "gas": "auto",
+    "contracts": {
+      "Bank": {
+        "args": [
+          
+        ]
+      },
+      "InsuranceCompany": {
+        "args": [
+          
+        ]
+      }
+    }
+  }
+}

@@ -1,0 +1,48 @@
+<html>
+
+<head>
+  <title>功能示範頁面</title>
+  <link rel="stylesheet" href="css/app.css">
+  <script src="js/app.js"></script>
+  <style>
+    pre {
+      outline: 1px solid #ccc;
+      padding: 5px;
+      margin: 5px;
+    }
+    
+    .string {
+      color: green;
+    }
+    
+    .number {
+      color: darkorange;
+    }
+    
+    .boolean {
+      color: blue;
+    }
+    
+    .null {
+      color: magenta;
+    }
+    
+    .key {
+      color: red;
+    }
+  </style>
+</head>
+
+<body>
+  <h3>功能示範頁面</h3>
+  <pre>
+用 web3.js 是沒有辦法讀取 indexed string 資料型態的 event log, 所以要 indexed 的字串資料必須要先轉成 bytes32。
+把 event log 當資料庫來使用的時候 key值 建議使用 bytes32, uint 之類的資料型態，跟MSSQL的 GUID, int 的概念雷同。</pre>
+
+  <h3> Logs </h3>
+  <div class="logs">
+  </div>
+
+</body>
+
+</html>
