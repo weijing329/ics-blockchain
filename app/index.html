@@ -38,11 +38,27 @@
   <pre>
 用 web3.js 是沒有辦法讀取 indexed string 資料型態的 event log, 所以要 indexed 的字串資料必須要先轉成 bytes32。
 把 event log 當資料庫來使用的時候 key值 建議使用 bytes32, uint 之類的資料型態，跟MSSQL的 GUID, int 的概念雷同。</pre>
-
+  <h3> 合約位置管理 </h3>
+  <div class="contracts_address">
+  </div>
+  <div id="set_contract_address" class="form-group form-inline">
+    <textarea cols="40" rows="3" class="contract_name form-control" placeholder="contract_name"></textarea>
+    <textarea cols="40" rows="3" class="contract_address form-control" placeholder="contract_address"></textarea>
+    <button class="set_contract_address btn btn-primary">記錄合約位置</button>
+    <p>需要mining</p>
+  </div>
+  <h3> 政府共用資料 - 自然人 </h3>
+  <div class="list_people">
+  </div>
+  <div id="set_person" class="form-group form-inline">
+    <textarea cols="40" rows="3" class="person_code form-control" placeholder="person_code"></textarea>
+    <textarea cols="40" rows="3" class="person_hash form-control" placeholder="person_hash"></textarea>
+    <button class="set_person btn btn-primary">記錄自然人</button>
+    <p>需要mining</p>
+  </div>
   <h3> Logs </h3>
   <div class="logs">
   </div>
-
 </body>
 
 </html>
