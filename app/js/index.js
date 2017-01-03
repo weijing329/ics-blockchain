@@ -68,12 +68,13 @@ var addToContractsAddress = function (contract_name) {
 };
 
 // 預設：合約清單
-var contract_names = ['Person', 
-                      'LegalEntity',
-                      'InternationInjuryAndDisease',
-                      'BankAccount',
-                      'Member'
-                      ];
+var contract_names = [
+  'Person',
+  'LegalEntity',
+  'InternationInjuryAndDisease',
+  'BankAccount',
+  'Member'
+];
 
 // 【重新載入合約位置】
 var reloadContractsAddress = function () {
@@ -103,9 +104,10 @@ var addToPeopleList = function (person_code) {
 };
 
 // 預設：自然人清單
-var person_codes = ['A123456789', 
-                      'B234567890'
-                      ];
+var person_codes = [
+  'A123456789',
+  'B234567890'
+];
 
 // 【重新載入自然人清單】
 var reloadPeopleList = function () {
@@ -153,7 +155,9 @@ $(document).ready(function () {
         var existing_item_index = contract_names.findIndex(function (item_value) {
           return item_value == contract_name;
         });
-        if (existing_item_index == -1) {contract_names.push(contract_name);}
+        if (existing_item_index == -1) {
+          contract_names.push(contract_name);
+        }
         reloadContractsAddress();
       } else {
         addJsonToLog(err);
@@ -165,7 +169,7 @@ $(document).ready(function () {
 
   // 【記錄自然人】
   reloadPeopleList();
-$("#set_person button.set_person").click(function () {
+  $("#set_person button.set_person").click(function () {
     addBoldToLog('[開始] 記錄自然人');
 
     var person_code = $("#set_person .person_code").val();
@@ -197,14 +201,27 @@ $("#set_person button.set_person").click(function () {
         var existing_item_index = person_codes.findIndex(function (item_value) {
           return item_value == person_code;
         });
-        if (existing_item_index == -1) {person_codes.push(person_code);}
+        if (existing_item_index == -1) {
+          person_codes.push(person_code);
+        }
         reloadPeopleList();
       } else {
         addJsonToLog(err);
       }
       e_SetPerson_listener.stopWatching();
     });
-    Government.SetPerson(person_code, person_hash);
+
+    Government.SetPerson(person_code, person_hash).then(function (txHash) {
+      addBoldToLog('[Pending] 記錄自然人');
+
+      var pending_date = moment();
+      addMomentToLog(pending_date);
+      var diff_microseconds = pending_date.diff(start_date);
+      addToLog('time span: ' + diff_microseconds + ' ms');
+
+      addCodeToLog('txHash: ' + txHash);
+      addBarToLog();
+    });
   });
 
 
