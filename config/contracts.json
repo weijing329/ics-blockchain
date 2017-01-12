@@ -1,7 +1,12 @@
 {
   "default": {
-    "gas": "auto",
+    "gas": "1000000",
     "contracts": {
+      "ContractsAddress": {
+        "args": [
+          
+        ]
+      },
       "Bank": {
         "args": [
           
@@ -9,12 +14,12 @@
       },
       "InsuranceCompany": {
         "args": [
-          
+          "$ContractsAddress"
         ]
       },
       "Government": {
         "args": [
-          "0x78c5afecca6488bbeda70a6cf7ad7f3f2914e23f"
+          "$ContractsAddress"
         ]
       }
     }

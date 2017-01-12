@@ -33,31 +33,88 @@
   </style>
 </head>
 
-<body>
-  <h3>功能示範頁面</h3>
-  <pre>
+<body style="background-color: darkgrey">
+  <div class="panel panel-default">
+    <div class="panel-body">
+      <h3>功能示範頁面</h3>
+      <pre>
 用 web3.js 是沒有辦法讀取 indexed string 資料型態的 event log, 所以要 indexed 的字串資料必須要先轉成 bytes32。
 把 event log 當資料庫來使用的時候 key值 建議使用 bytes32, uint 之類的資料型態，跟MSSQL的 GUID, int 的概念雷同。</pre>
-  <h3> 合約位置管理 </h3>
-  <div class="contracts_address">
+    </div>
   </div>
-  <div id="set_contract_address" class="form-group form-inline">
-    <textarea cols="40" rows="3" class="contract_name form-control" placeholder="contract_name"></textarea>
-    <textarea cols="40" rows="3" class="contract_address form-control" placeholder="contract_address"></textarea>
-    <button class="set_contract_address btn btn-primary">記錄合約位置</button>
-    <p>需要mining</p>
+  <div class="panel panel-default">
+    <div class="panel-body">
+      <h3> 合約位置管理 </h3>
+      <div class="contracts_address">
+      </div>
+      <div id="set_contract_address" class="form-group form-inline">
+        <textarea cols="40" rows="3" class="contract_name form-control" placeholder="contract_name"></textarea>
+        <textarea cols="40" rows="3" class="contract_address form-control" placeholder="contract_address"></textarea>
+        <button class="set_contract_address btn btn-primary">記錄合約位置</button>
+        <p>需要mining</p>
+      </div>
+    </div>
   </div>
-  <h3> 政府共用資料 - 自然人 </h3>
-  <div class="list_people">
+  <div class="panel panel-default">
+    <div class="panel-body">
+      <h3> 政府共用資料 - 相關合約位置 </h3>
+      <div class="list_government_contracts">
+      </div>
+      <div id="government_reload" class="form-group form-inline">
+        <button class="government_reload btn btn-primary">重新載入相關合約位置</button>
+        <p>需要mining</p>
+      </div>
+      <hr>
+      <h3> 政府共用資料 - 自然人 </h3>
+      <div class="list_people">
+      </div>
+      <div id="set_person" class="form-group form-inline">
+        <textarea cols="40" rows="3" class="person_code form-control" placeholder="person_code"></textarea>
+        <textarea cols="40" rows="3" class="person_hash form-control" placeholder="person_hash"></textarea>
+        <button class="set_person btn btn-primary">記錄自然人</button>
+        <p>需要mining</p>
+      </div>
+    </div>
   </div>
-  <div id="set_person" class="form-group form-inline">
-    <textarea cols="40" rows="3" class="person_code form-control" placeholder="person_code"></textarea>
-    <textarea cols="40" rows="3" class="person_hash form-control" placeholder="person_hash"></textarea>
-    <button class="set_person btn btn-primary">記錄自然人</button>
-    <p>需要mining</p>
+  <div class="panel panel-default">
+    <div class="panel-body">
+      <h3> 保險公司 - 相關合約位置 </h3>
+      <div class="list_insurance_company_contracts">
+      </div>
+      <div id="insurance_company_reload" class="form-group form-inline">
+        <button class="insurance_company_reload btn btn-primary">重新載入相關合約位置</button>
+        <p>需要mining</p>
+      </div>
+      <hr>
+      <h3> 保險公司 - 註冊保戶保單 </h3>
+      <div class="list_enrollment">
+      </div>
+      <div id="set_enrollment" class="form-group form-inline">
+        <textarea cols="40" rows="3" class="composite_key form-control" placeholder="composite_key"></textarea>
+        <textarea cols="40" rows="3" class="enrollment_hash form-control" placeholder="enrollment_hash"></textarea>
+        <textarea cols="40" rows="3" class="daily_benefit_amount form-control" placeholder="daily_benefit_amount"></textarea>
+        <button class="set_enrollment btn btn-primary">註冊保戶保單</button>
+        <p>需要mining</p>
+      </div>
+      <hr>
+      <h3> 保險公司 - 契約內容 </h3>
+      <div class="list_contract_term">
+      </div>
+      <div id="set_contract_term" class="form-group form-inline">
+        <textarea cols="40" rows="3" class="composite_key form-control" placeholder="composite_key"></textarea>
+        <textarea cols="40" rows="3" class="contract_term_hash form-control" placeholder="contract_term_hash"></textarea>
+        <textarea cols="40" rows="3" class="claim_adjustment form-control" placeholder="claim_adjustment"></textarea>
+        <button class="set_contract_term btn btn-primary">記錄契約內容</button>
+        <p>需要mining</p>
+      </div>
+    </div>
   </div>
-  <h3> Logs </h3>
-  <div class="logs">
+  <div class="panel panel-default">
+    <div class="panel-body">
+      <h3> Logs </h3>
+      <div class="logs">
+      </div>
+    </div>
   </div>
 </body>
 
