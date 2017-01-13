@@ -1,6 +1,6 @@
 {
   "default": {
-    "gas": "1000000",
+    "gas": "3000000",
     "contracts": {
       "ContractsAddress": {
         "args": [

@@ -39,7 +39,7 @@ var contract_term_CPKs = [
 // 【重新載入契約內容清單】
 var reloadContractTermList = function () {
   clearContractTermList();
-  appendContractTermList('composite_key', 'contract_term_hash', 'claim_adjustment');
+  appendContractTermList('composite_key', 'contract_term_hash', 'claim_adjustment : Decimal(19,9)x9');
   appendContractTermList();
   contract_term_CPKs.forEach(function (contract_term_CPK) {
     addToContractTermList(contract_term_CPK);

@@ -21,4 +21,6 @@ $(document).ready(function () {
   // 【記錄契約內容】
   InitContractTerm();
 
+  // 【記錄醫療記錄】
+  MedicalRecordManager.Init();
 });

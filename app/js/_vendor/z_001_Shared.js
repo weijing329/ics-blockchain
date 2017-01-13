@@ -26,10 +26,17 @@ var addCodeToLog = function (code) {
   $(".logs").append(pre);
 };
 
-var addJsonToLog = function (input) {
+var addJsonToLog = function (input, obj_name) {
+  obj_name = typeof obj_name !== 'undefined' ? obj_name : '';
+
   if (typeof input === 'object') {
     var pretty_json = JSON.stringify(input, undefined, 2);
-    addCodeToLog(syntaxHighlight(pretty_json));
+    if (obj_name != '') {
+      addCodeToLog(obj_name + '<br>' + syntaxHighlight(pretty_json));
+    } 
+    else {
+      addCodeToLog(syntaxHighlight(pretty_json));
+    }
   } else {
     addCodeToLog(input);
   }

@@ -39,7 +39,7 @@ var enrollment_CPKs = [
 // 【重新載入註冊保戶保單清單】
 var reloadEnrollmentList = function () {
   clearEnrollmentList();
-  appendEnrollmentList('composite_key', 'enrollment_hash', 'daily_benefit_amount');
+  appendEnrollmentList('composite_key', 'enrollment_hash', 'daily_benefit_amount : Int');
   appendEnrollmentList();
   enrollment_CPKs.forEach(function (enrollment_CPK) {
     addToEnrollmentList(enrollment_CPK);
