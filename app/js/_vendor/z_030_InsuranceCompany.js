@@ -36,6 +36,8 @@ var InsuranceCompanyContractsManager = (function () {
     AppendList('Enrollment', InsuranceCompany._originalContractObject.h_Enrollment());
     AppendList('ContractTerm', InsuranceCompany._originalContractObject.h_ContractTerm());
     AppendList('MedicalRecord', InsuranceCompany._originalContractObject.h_MedicalRecord());
+    AppendList('InsurancePolicy', InsuranceCompany._originalContractObject.h_InsurancePolicy());
+    AppendList('ClaimRecord', InsuranceCompany._originalContractObject.h_ClaimRecord());
   };
 
   /////////////////////////////////////////////////////////////////////////////////////////////////

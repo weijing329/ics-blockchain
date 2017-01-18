@@ -26,4 +26,10 @@ $(document).ready(function () {
 
   // 【計算類手術理賠 Type4】
   CalculateBenefitType4Manager.Init();
+
+  // 【寫入保險契約】
+  InsurancePolicyManager.Init();
+
+  // 【寫入理賠案件】
+  ClaimRecordManager.Init();
 });

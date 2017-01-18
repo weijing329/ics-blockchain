@@ -1,9 +1,13 @@
 pragma solidity ^0.4.6;
 
+import "lib/ConvertTypes.sol";
+
 import "shared/ContractsAddress.sol";
 import "insurance/Enrollment.sol";
 import "insurance/ContractTerm.sol";
 import "insurance/MedicalRecord.sol";
+import "insurance/InsurancePolicy.sol";
+import "insurance/ClaimRecord.sol";
 
 contract InsuranceCompany {
 
@@ -11,11 +15,15 @@ contract InsuranceCompany {
   Enrollment private _Enrollment;
   ContractTerm private _ContractTerm;
   MedicalRecord private _MedicalRecord;
+  InsurancePolicy private _InsurancePolicy;
+  ClaimRecord private _ClaimRecord;
 
   address public h_ContractsAddress;
   address public h_Enrollment;
   address public h_ContractTerm;
   address public h_MedicalRecord;
+  address public h_InsurancePolicy;
+  address public h_ClaimRecord;
 
   function InsuranceCompany(address contracts_address) {
     UpdateContractAddress(contracts_address);
@@ -42,6 +50,16 @@ contract InsuranceCompany {
     h_MedicalRecord = _ContractsAddress.GetAddress('MedicalRecord');
     if (h_MedicalRecord != 0x0) {
       _MedicalRecord = MedicalRecord(h_MedicalRecord);
+    }
+
+    h_InsurancePolicy = _ContractsAddress.GetAddress('InsurancePolicy');
+    if (h_InsurancePolicy != 0x0) {
+      _InsurancePolicy = InsurancePolicy(h_InsurancePolicy);
+    }
+
+    h_ClaimRecord = _ContractsAddress.GetAddress('ClaimRecord');
+    if (h_ClaimRecord != 0x0) {
+      _ClaimRecord = ClaimRecord(h_ClaimRecord);
     }
   }
 
@@ -97,4 +115,65 @@ contract InsuranceCompany {
     return _MedicalRecord.Get_fee(medical_record_ID);
   }
   // ^^^^^ 【醫療記錄】^^^^^ 
+
+  /////////////////////////////////////////////////////////////////////////////
+  // vvvvv 【保險契約】vvvvv 
+  function SetInsurancePolicy(string composite_key, bytes32 row_hash, address contract_address) {
+    _InsurancePolicy.SetInsurancePolicy(composite_key, row_hash, contract_address);
+  }
+
+  function InsurancePolicy_row_hash(string composite_key) constant returns (bytes32) {
+    return _InsurancePolicy.Get_row_hash(composite_key);
+  }
+
+  function InsurancePolicy_contract_address(string composite_key) constant returns (address) {
+    return _InsurancePolicy.Get_contract_address(composite_key);
+  }
+  // ^^^^^ 【保險契約】^^^^^ 
+
+  /////////////////////////////////////////////////////////////////////////////
+  // vvvvv 【理賠案件】vvvvv 
+  function SetClaimRecord(string composite_key, bytes32 row_hash, string insured_person_ID, string medical_record_ID, uint eligible_benefit_amount, string claim_paid_TR_ID, uint status_code) {
+    _ClaimRecord.SetClaimRecord(composite_key, row_hash, insured_person_ID, medical_record_ID, eligible_benefit_amount, claim_paid_TR_ID, status_code);
+  }
+
+  function ClaimRecord_row_hash(string composite_key) constant returns (bytes32) {
+    return _ClaimRecord.Get_row_hash(composite_key);
+  }
+
+  function ClaimRecord_insured_person_ID(string composite_key) constant returns (string) {
+    string memory insured_person_ID = ConvertTypes.Bytes32ToString(_ClaimRecord.Get_insured_person_ID_Bytes32(composite_key));
+    return insured_person_ID;
+  }
+
+  // function Get_insured_person_ID_Bytes32(string composite_key) constant returns (bytes32) {
+  //   return ConvertTypes.StringToBytes32(cpk_S_ClaimRecord[composite_key].insured_person_ID);
+  // }
+
+  function ClaimRecord_medical_record_ID(string composite_key) constant returns (string) {
+    string memory medical_record_ID = ConvertTypes.Bytes32ToString(_ClaimRecord.Get_medical_record_ID_Bytes32(composite_key));
+    return medical_record_ID;
+  }
+
+  // function Get_medical_record_ID_Bytes32(string composite_key) constant returns (bytes32) {
+  //   return ConvertTypes.StringToBytes32(cpk_S_ClaimRecord[composite_key].medical_record_ID);
+  // }
+
+  function ClaimRecord_eligible_benefit_amount(string composite_key) constant returns (uint) {
+    return _ClaimRecord.Get_eligible_benefit_amount(composite_key);
+  }
+
+  function ClaimRecord_claim_paid_TR_ID(string composite_key) constant returns (string) {
+    string memory claim_paid_TR_ID = ConvertTypes.Bytes32ToString(_ClaimRecord.Get_claim_paid_TR_ID_Bytes32(composite_key));
+    return claim_paid_TR_ID;
+  }
+
+  // function Get_claim_paid_TR_ID_Bytes32(string composite_key) constant returns (bytes32) {
+  //   return ConvertTypes.StringToBytes32(cpk_S_ClaimRecord[composite_key].claim_paid_TR_ID);
+  // }
+
+  function ClaimRecord_status_code(string composite_key) constant returns (uint) {
+    return _ClaimRecord.Get_status_code(composite_key);
+  }
+  // ^^^^^ 【理賠案件】^^^^^ 
 }

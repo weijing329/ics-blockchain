@@ -37,7 +37,9 @@ var contract_names = [
   'Member',
   'Enrollment',
   'ContractTerm',
-  'MedicalRecord'
+  'MedicalRecord',
+  'InsurancePolicy',
+  'ClaimRecord'
 ];
 
 // 【重新載入合約位置】

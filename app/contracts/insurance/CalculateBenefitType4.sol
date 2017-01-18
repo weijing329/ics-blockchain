@@ -1,6 +1,7 @@
 pragma solidity ^0.4.6;
 
-import "lib/strings.sol";
+import "lib/maths.sol";
+import "lib/ConvertTypes.sol";
 
 import "shared/ContractsAddress.sol";
 import "shared/ConcateCPK.sol";
@@ -9,7 +10,6 @@ import "insurance/ContractTerm.sol";
 import "insurance/MedicalRecord.sol";
 
 contract CalculateBenefitType4 {
-  using strings for *;
 
   ContractsAddress private _ContractsAddress;
   ConcateCPK private _ConcateCPK;
@@ -56,24 +56,6 @@ contract CalculateBenefitType4 {
     }
   }
 
-  function Max(uint a, uint b) internal returns (uint) {
-    if (a > b) {
-      return a;
-    }
-    else {
-      return b;
-    }
-  }
-
-  function Min(uint a, uint b) internal returns (uint) {
-    if (a < b) {
-      return a;
-    }
-    else {
-      return b;
-    }
-  }
-
   // daily_benefit_amount : Int
   // policy_claimable_amount: Int
   // hospital_days : Int
@@ -81,10 +63,10 @@ contract CalculateBenefitType4 {
   // claim_adjustment : Decimal(19,9)x9
   // return Decimal(19,9)x9
   function Type4(uint daily_benefit_amount, uint policy_claimable_amount, uint hospital_days, uint fee, uint claim_adjustment) internal returns(uint) {
-    uint a1 = Min(fee, policy_claimable_amount);
+    uint a1 = maths.Min(fee, policy_claimable_amount);
     uint a2 = daily_benefit_amount * hospital_days;
 
-    uint b1 = Max(a1, a2) * 1000000000;
+    uint b1 = maths.Max(a1, a2) * 1000000000;
     uint b2 = (daily_benefit_amount * claim_adjustment);
 
     return b1 + b2;
@@ -92,13 +74,13 @@ contract CalculateBenefitType4 {
 
   function ConcateEnrollmentCPK(string insured_person_ID, string insurance_policy_package_ID, string insurance_policy_ID) returns (string) {
     bytes32 b_enrollment_CPK = _ConcateCPK.ConcatCPKtoBytes32(insured_person_ID, insurance_policy_package_ID, insurance_policy_ID);
-    string memory enrollment_CPK = strings.toSliceB32(b_enrollment_CPK).toString();
+    string memory enrollment_CPK = ConvertTypes.Bytes32ToString(b_enrollment_CPK);
     return enrollment_CPK;
   }
 
   function ConcateContractTermCPK(string insurance_policy_ID, string benefit_item_ID) returns (string) {
     bytes32 b_contract_term_CPK = _ConcateCPK.ConcatCPKtoBytes32(insurance_policy_ID, benefit_item_ID);
-    string memory contract_term_CPK = strings.toSliceB32(b_contract_term_CPK).toString();
+    string memory contract_term_CPK = ConvertTypes.Bytes32ToString(b_contract_term_CPK);
     return contract_term_CPK;
   }
 

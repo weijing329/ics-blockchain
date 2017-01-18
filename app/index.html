@@ -129,7 +129,7 @@
         <p>需要mining</p>
       </div>
       <hr>
-      <h3> 保險公司 - 計算類手術理賠 </h3>
+      <h3> 保險公司 - 計算類手術理賠 (簡易版:實做跨合約傳遞查詢結果及計算) </h3>
       <div class="panel panel-default">
         <div class="panel-heading">CalculateBenefitType4.sol</div>
         <table class="table table-sm table-bordered table-striped list_calc_type4">
@@ -142,6 +142,38 @@
         <textarea cols="20" rows="1" class="medical_record_ID form-control" placeholder="medical_record_ID"></textarea>
         <textarea cols="20" rows="1" class="benefit_item_ID form-control" placeholder="benefit_item_ID"></textarea>
         <button class="calculate_benefit_type_4 btn btn-primary">計算類手術理賠</button>
+        <p>需要mining</p>
+      </div>
+      <hr>
+      <h3> 保險公司 - 保險契約 </h3>
+      <div class="panel panel-default">
+        <div class="panel-heading">InsurancePolicy.sol</div>
+        <table class="table table-sm table-bordered table-striped list_insurance_policy">
+        </table>
+      </div>
+      <div id="set_insurance_policy" class="form-group form-inline">
+        <textarea cols="20" rows="3" class="composite_key form-control" placeholder="composite_key"></textarea>
+        <textarea cols="30" rows="3" class="row_hash form-control" placeholder="row_hash"></textarea>
+        <textarea cols="20" rows="3" class="contract_address form-control" placeholder="contract_address"></textarea>
+        <button class="set_insurance_policy btn btn-primary">寫入保險契約</button>
+        <p>需要mining</p>
+      </div>
+      <hr>
+      <h3> 保險公司 - 理賠案件 </h3>
+      <div class="panel panel-default">
+        <div class="panel-heading">ClaimRecord.sol</div>
+        <table class="table table-sm table-bordered table-striped list_claim_record">
+        </table>
+      </div>
+      <div id="set_claim_record" class="form-group form-inline">
+        <textarea cols="20" rows="3" class="composite_key form-control" placeholder="composite_key"></textarea>
+        <textarea cols="30" rows="3" class="row_hash form-control" placeholder="row_hash"></textarea>
+        <textarea cols="20" rows="3" class="insured_person_ID form-control" placeholder="insured_person_ID"></textarea>
+        <textarea cols="20" rows="3" class="medical_record_ID form-control" placeholder="medical_record_ID"></textarea>
+        <textarea cols="20" rows="3" class="eligible_benefit_amount form-control" placeholder="eligible_benefit_amount"></textarea>
+        <textarea cols="20" rows="3" class="claim_paid_TR_ID form-control" placeholder="claim_paid_TR_ID"></textarea>
+        <textarea cols="20" rows="3" class="status_code form-control" placeholder="status_code"></textarea>
+        <button class="set_claim_record btn btn-primary">寫入理賠案件</button>
         <p>需要mining</p>
       </div>
     </div>
