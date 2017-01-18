@@ -47,8 +47,8 @@ contract InsuranceCompany {
 
   /////////////////////////////////////////////////////////////////////////////
   // vvvvv 【註冊保戶保單】vvvvv 
-  function SetEnrollment(string composite_key, bytes32 enrollment_hash, uint daily_benefit_amount) {
-    _Enrollment.SetEnrollment(composite_key, enrollment_hash, daily_benefit_amount);
+  function SetEnrollment(string composite_key, bytes32 enrollment_hash, uint daily_benefit_amount, uint policy_claimable_amount) {
+    _Enrollment.SetEnrollment(composite_key, enrollment_hash, daily_benefit_amount, policy_claimable_amount);
   }
 
   function GetEnrollment(string composite_key) constant returns (bytes32) {
@@ -57,6 +57,10 @@ contract InsuranceCompany {
 
   function Get_daily_benefit_amount(string composite_key) constant returns (uint) {
     return _Enrollment.Get_daily_benefit_amount(composite_key);
+  }
+
+  function Get_policy_claimable_amount(string composite_key) constant returns (uint) {
+    return _Enrollment.Get_policy_claimable_amount(composite_key);
   }
   // ^^^^^ 【註冊保戶保單】^^^^^ 
 
@@ -77,19 +81,19 @@ contract InsuranceCompany {
 
   /////////////////////////////////////////////////////////////////////////////
   // vvvvv 【醫療記錄】vvvvv 
-  function SetMedicalRecord(uint medical_record_ID, bytes32 medical_record_hash, uint hospital_days, uint fee) {
+  function SetMedicalRecord(string medical_record_ID, bytes32 medical_record_hash, uint hospital_days, uint fee) {
     _MedicalRecord.SetMedicalRecord(medical_record_ID, medical_record_hash, hospital_days, fee);
   }
 
-  function GetMedicalRecord(uint medical_record_ID) constant returns (bytes32) {
+  function GetMedicalRecord(string medical_record_ID) constant returns (bytes32) {
     return _MedicalRecord.GetMedicalRecord(medical_record_ID);
   }
 
-  function Get_hospital_days(uint medical_record_ID) constant returns (uint) {
+  function Get_hospital_days(string medical_record_ID) constant returns (uint) {
     return _MedicalRecord.Get_hospital_days(medical_record_ID);
   }
 
-  function Get_fee(uint medical_record_ID) constant returns (uint) {
+  function Get_fee(string medical_record_ID) constant returns (uint) {
     return _MedicalRecord.Get_fee(medical_record_ID);
   }
   // ^^^^^ 【醫療記錄】^^^^^ 

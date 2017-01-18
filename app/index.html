@@ -34,15 +34,20 @@
 </head>
 
 <body style="background-color: darkgrey">
-  <div class="panel panel-default">
+  <div class="panel panel-default main_section">
     <div class="panel-body">
       <h3>功能示範頁面</h3>
       <pre>
 用 web3.js 是沒有辦法讀取 indexed string 資料型態的 event log, 所以要 indexed 的字串資料必須要先轉成 bytes32。
-把 event log 當資料庫來使用的時候 key值 建議使用 bytes32, uint 之類的資料型態，跟MSSQL的 GUID, int 的概念雷同。</pre>
+把 event log 當資料庫來使用的時候 key值 建議使用 bytes32, uint 之類的資料型態，跟MSSQL的 GUID, int 的概念雷同。
+
+目前有在區塊鏈中，使用字串組合的方式模仿composite key，而uint的 PK 再轉換成文字上相較麻煩／處理方式不統一。
+所以目前即使是int型態的 PK，在區塊鏈中也是用 string 的型態來儲存。
+但跨合約傳遞 string 又會出現 Error: Type inaccessible dynamic type is not implicitly convertible to expected type string memory.
+所以 return 的值改用 bytes32。</pre>
     </div>
   </div>
-  <div class="panel panel-default">
+  <div class="panel panel-default main_section">
     <div class="panel-body">
       <h3> 合約位置管理 </h3>
       <div class="contracts_address">
@@ -55,7 +60,7 @@
       </div>
     </div>
   </div>
-  <div class="panel panel-default">
+  <div class="panel panel-default main_section">
     <div class="panel-body">
       <h3> 政府共用資料 - 相關合約位置 </h3>
       <div class="list_government_contracts">
@@ -76,7 +81,7 @@
       </div>
     </div>
   </div>
-  <div class="panel panel-default">
+  <div class="panel panel-default main_section">
     <div class="panel-body">
       <h3> 保險公司 - 相關合約位置 </h3>
       <div class="list_insurance_company_contracts">
@@ -87,12 +92,16 @@
       </div>
       <hr>
       <h3> 保險公司 - 註冊保戶保單 </h3>
-      <div class="list_enrollment">
+      <div class="panel panel-default">
+        <div class="panel-heading">Enrollment.sol</div>
+        <table class="table table-sm table-bordered table-striped list_enrollment">
+        </table>
       </div>
       <div id="set_enrollment" class="form-group form-inline">
-        <textarea cols="40" rows="3" class="composite_key form-control" placeholder="composite_key"></textarea>
+        <textarea cols="20" rows="3" class="composite_key form-control" placeholder="composite_key"></textarea>
         <textarea cols="40" rows="3" class="enrollment_hash form-control" placeholder="enrollment_hash"></textarea>
-        <textarea cols="40" rows="3" class="daily_benefit_amount form-control" placeholder="daily_benefit_amount"></textarea>
+        <textarea cols="30" rows="3" class="daily_benefit_amount form-control" placeholder="daily_benefit_amount"></textarea>
+        <textarea cols="30" rows="3" class="policy_claimable_amount form-control" placeholder="policy_claimable_amount"></textarea>
         <button class="set_enrollment btn btn-primary">註冊保戶保單</button>
         <p>需要mining</p>
       </div>
@@ -119,9 +128,25 @@
         <button class="set_medical_record btn btn-primary">寫入醫療記錄</button>
         <p>需要mining</p>
       </div>
+      <hr>
+      <h3> 保險公司 - 計算類手術理賠 </h3>
+      <div class="panel panel-default">
+        <div class="panel-heading">CalculateBenefitType4.sol</div>
+        <table class="table table-sm table-bordered table-striped list_calc_type4">
+        </table>
+      </div>
+      <div id="calculate_benefit_type_4" class="form-group form-inline">
+        <textarea cols="20" rows="1" class="insured_person_ID form-control" placeholder="insured_person_ID"></textarea>
+        <textarea cols="30" rows="1" class="insurance_policy_package_ID form-control" placeholder="insurance_policy_package_ID"></textarea>
+        <textarea cols="20" rows="1" class="insurance_policy_ID form-control" placeholder="insurance_policy_ID"></textarea>
+        <textarea cols="20" rows="1" class="medical_record_ID form-control" placeholder="medical_record_ID"></textarea>
+        <textarea cols="20" rows="1" class="benefit_item_ID form-control" placeholder="benefit_item_ID"></textarea>
+        <button class="calculate_benefit_type_4 btn btn-primary">計算類手術理賠</button>
+        <p>需要mining</p>
+      </div>
     </div>
   </div>
-  <div class="panel panel-default">
+  <div class="panel panel-default main_section">
     <div class="panel-body">
       <h3> Logs </h3>
       <div class="logs">

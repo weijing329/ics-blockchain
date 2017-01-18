@@ -16,11 +16,14 @@ $(document).ready(function () {
   InsuranceCompanyContractsManager.Init();
 
   // 【註冊保戶保單】
-  InitEnrollment();
+  EnrollmentManager.Init();
 
   // 【記錄契約內容】
   InitContractTerm();
 
   // 【記錄醫療記錄】
   MedicalRecordManager.Init();
+
+  // 【計算類手術理賠 Type4】
+  CalculateBenefitType4Manager.Init();
 });

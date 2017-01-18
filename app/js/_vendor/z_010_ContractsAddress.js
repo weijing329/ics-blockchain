@@ -29,6 +29,7 @@ var addToContractsAddress = function (contract_name) {
 
 // 預設：合約清單
 var contract_names = [
+  'ConcateCPK',
   'Person',
   'LegalEntity',
   'InternationInjuryAndDisease',

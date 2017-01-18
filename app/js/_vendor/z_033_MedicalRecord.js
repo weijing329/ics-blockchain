@@ -36,8 +36,8 @@ var MedicalRecordManager = (function () {
   };
 
   var list_keys = [
-    1,
-    2
+    '1',
+    '2'
   ];
 
   var addToList = function (medical_record_ID) {
@@ -88,7 +88,7 @@ var MedicalRecordManager = (function () {
       addBarToLog();
 
       var event_listener = MedicalRecord._originalContractObject.e_SetMedicalRecord({
-        medical_record_ID: medical_record_ID
+        medical_record_ID: web3.sha3(medical_record_ID)
       });
       event_listener.watch(function (err, logs) {
         if (!err) {

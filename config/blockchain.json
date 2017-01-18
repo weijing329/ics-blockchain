@@ -10,7 +10,9 @@
     "rpcCorsDomain": "http://localhost:8000",
     "account": {
       "password": "config/development/password"
-    }
+    },
+    "gas_limit": 2000000,
+    "gas_price": 10000000000000
   },
   "testnet": {
     "networkType": "testnet",

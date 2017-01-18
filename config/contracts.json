@@ -1,7 +1,13 @@
 {
   "default": {
-    "gas": "3000000",
+    "gas": "auto",
     "contracts": {
+      "Enrollment": {
+        "args": [
+          
+        ],
+        "gas": "auto"
+      },
       "ContractsAddress": {
         "args": [
           
@@ -15,12 +21,19 @@
       "InsuranceCompany": {
         "args": [
           "$ContractsAddress"
-        ]
+        ],
+        "gas": 4712388
       },
       "Government": {
         "args": [
           "$ContractsAddress"
         ]
+      },
+      "CalculateBenefitType4": {
+        "args": [
+          "$ContractsAddress"
+        ],
+        "gas": 4712388
       }
     }
   }
