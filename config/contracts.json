@@ -40,6 +40,12 @@
 
         ],
         "gas": 4712388
+      },
+      "CalculateBenefits": {
+        "args": [
+          "$ContractsAddress"
+        ],
+        "gas": 4712388
       }
     }
   }
