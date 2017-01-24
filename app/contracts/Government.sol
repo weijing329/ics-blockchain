@@ -39,12 +39,8 @@ contract Government {
 
   /////////////////////////////////////////////////////////////////////////////
   // vvvvv 【自然人】vvvvv 
-  function SetPerson(string person_code, bytes32 person_hash) {
-    _Person.SetPerson(person_code, person_hash);
-  }
-
-  function GetPerson(string person_code) constant returns (bytes32) {
-    return _Person.GetPerson(person_code);
+  function SetPerson(string row_CPK, string row_data_json) {
+    _Person.SetPerson(row_CPK, row_data_json);
   }
   // ^^^^^ 【自然人】^^^^^ 
 

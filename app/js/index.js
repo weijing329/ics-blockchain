@@ -10,7 +10,7 @@ $(document).ready(function () {
   GovernmentContractsManager.Init();
 
   // 【記錄自然人】
-  InitPerson();
+  PersonManager.Init();
 
   // [寫入國際傷疾病代碼]
   InternationInjuryAndDiseaseManager.Init();

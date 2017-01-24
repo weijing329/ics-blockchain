@@ -71,12 +71,15 @@
       </div>
       <hr>
       <h3> 政府共用資料 - 自然人 </h3>
-      <div class="list_people">
+      <div class="panel panel-default">
+        <div class="panel-heading">Person.sol</div>
+        <table class="table table-sm table-bordered table-striped Person">
+        </table>
       </div>
-      <div id="set_person" class="form-group form-inline">
-        <textarea cols="40" rows="3" class="person_code form-control" placeholder="person_code"></textarea>
-        <textarea cols="40" rows="3" class="person_hash form-control" placeholder="person_hash"></textarea>
-        <button class="set_person btn btn-primary">寫入自然人資訊</button>
+      <div id="SetPerson" class="form-group form-inline">
+        <textarea cols="40" rows="3" class="row_CPK form-control" placeholder="row_CPK"></textarea>
+        <textarea cols="40" rows="3" class="row_data_json form-control" placeholder="row_data_json"></textarea>
+        <button class="SetPerson btn btn-primary">寫入自然人資訊</button>
         <p>需要mining</p>
       </div>
       <hr>

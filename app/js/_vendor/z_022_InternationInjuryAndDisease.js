@@ -16,7 +16,7 @@ var InternationInjuryAndDiseaseManager = (function () {
   function InternationInjuryAndDiseaseManager() {}
 
   function Table() {
-    return $("table.InternationInjuryAndDisease");
+    return $("table." + ContractObject_name);
   };
 
   function ClearList() {
@@ -50,11 +50,8 @@ var InternationInjuryAndDiseaseManager = (function () {
   function AppendTableBody(index, row_CPK, row_data_json) {
     row_data_json = typeof row_data_json !== 'undefined' ? row_data_json : 'N/A';
 
-    //var row_count = Table().find("tr").length;
-    var row_count = index + 1;
-
-    var html = '<tr data-position="' + row_count + '">';
-    html = html + '<th scope="row">' + row_count + '</th>';
+    var html = '<tr data-position="' + index + '">';
+    html = html + '<th scope="row">' + index + '</th>';
     html = html + '<td>' + row_CPK + '</td>';
     html = html + '<td style="word-wrap: break-word;min-width: 160px;max-width: 160px;">' + row_data_json + '</td>';
     html = html + '</tr>';
@@ -82,11 +79,6 @@ var InternationInjuryAndDiseaseManager = (function () {
     return ($(b).data('position')) < ($(a).data('position')) ? 1 : -1;    
   }
 
-  // var list_keys = [
-  //   'A1234',
-  //   'B2345'
-  // ];
-
   var addToList = function (row_CPK, index) {
     var row_data_json_hash = ContractObject.GetTableRowDataHash(row_CPK);
     var row_data_json = ContractObject.GetTableRowDataJson(row_CPK, row_data_json_hash);
@@ -97,9 +89,6 @@ var InternationInjuryAndDiseaseManager = (function () {
     ClearList();
     AppendTableHead();
     TableCreateTHEAD();
-    // list_keys.forEach(function (row_CPK, index) {
-    //   addToList(row_CPK, index);
-    // });
     var row_count = ContractObject.GetRowCount().toNumber();
     for (var i = 0; i < row_count; i++) {
       var row_CPK = ContractObject.GetRowKey(i);
@@ -145,12 +134,6 @@ var InternationInjuryAndDiseaseManager = (function () {
 
           addBarToLog();
 
-          // var existing_item_index = list_keys.findIndex(function (item_value) {
-          //   return item_value == row_CPK;
-          // });
-          // if (existing_item_index == -1) {
-          //   list_keys.push(row_CPK);
-          // }
           ReloadList();
         } else {
           addJsonToLog(err);

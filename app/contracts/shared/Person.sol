@@ -1,14 +1,10 @@
 pragma solidity ^0.4.6;
-contract Person {
-  mapping (string => bytes32) private code_PersonHash;
 
-  event e_SetPerson(bytes32 indexed person_code_hash, bytes32 person_hash);
-  function SetPerson(string person_code, bytes32 person_hash) {
-    code_PersonHash[person_code] = person_hash;
-    e_SetPerson(keccak256(person_code), person_hash);
-  }
+import "base_class/TableRowDataStorage.sol";
 
-  function GetPerson(string person_code) constant returns (bytes32) {
-    return code_PersonHash[person_code];
+contract Person is TableRowDataStorage {
+  // row_CPK = Person.code
+  function SetPerson(string row_CPK, string row_data_json) {
+    TableRowDataStorage.SetTableRowDataJson(row_CPK, row_data_json);
   }
 }
