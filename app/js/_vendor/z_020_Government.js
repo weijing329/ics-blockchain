@@ -34,6 +34,7 @@ var GovernmentContractsManager = (function () {
     AppendContractsList();
     AppendContractsList('ContractsAddress', Government._originalContractObject.h_ContractsAddress());
     AppendContractsList('Person', Government._originalContractObject.h_Person());
+    AppendContractsList('InternationInjuryAndDisease', Government._originalContractObject.h_InternationInjuryAndDisease());
   };
 
   /////////////////////////////////////////////////////////////////////////////////////////////////

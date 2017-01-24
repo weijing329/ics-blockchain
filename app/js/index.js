@@ -12,6 +12,9 @@ $(document).ready(function () {
   // 【記錄自然人】
   InitPerson();
 
+  // [寫入國際傷疾病代碼]
+  InternationInjuryAndDiseaseManager.Init();
+
   // 【保險公司】
   InsuranceCompanyContractsManager.Init();
 
