@@ -39,15 +39,15 @@ contract Government {
 
   /////////////////////////////////////////////////////////////////////////////
   // vvvvv 【自然人】vvvvv 
-  function SetPerson(string row_CPK, string row_data_json) {
-    _Person.SetPerson(row_CPK, row_data_json);
+  function SetPerson(string row_CPK, string row_data) {
+    _Person.SetPerson(row_CPK, row_data);
   }
   // ^^^^^ 【自然人】^^^^^ 
 
   /////////////////////////////////////////////////////////////////////////////
   // vvvvv 【寫入國際傷疾病代碼】vvvvv 
-  function SetInternationInjuryAndDisease(string row_CPK, string row_data_json) {
-    _InternationInjuryAndDisease.SetInternationInjuryAndDisease(row_CPK, row_data_json);
+  function SetInternationInjuryAndDisease(string row_CPK, string row_data) {
+    _InternationInjuryAndDisease.SetInternationInjuryAndDisease(row_CPK, row_data);
   }
   // ^^^^^ 【寫入國際傷疾病代碼】^^^^^ 
 }

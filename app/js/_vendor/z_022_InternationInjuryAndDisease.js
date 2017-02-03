@@ -10,7 +10,7 @@ var InternationInjuryAndDiseaseManager = (function () {
   var ContractObject_name = 'InternationInjuryAndDisease';
   var div_ID = 'SetInternationInjuryAndDisease';
   var set_function = 'SetInternationInjuryAndDisease';
-  var set_event = 'e_SetTableRowDataJson';
+  var set_event = 'e_SetTableRowData';
 
   // Constructor
   function InternationInjuryAndDiseaseManager() {}
@@ -40,20 +40,20 @@ var InternationInjuryAndDiseaseManager = (function () {
     var html = '<tr>';
     html = html + '<th>#</th>';
     html = html + '<th>row_CPK</th>';
-    html = html + '<th>row_data_json</th>';
+    html = html + '<th>row_data</th>';
     html = html + '</tr>';
 
     Table().append(html);
     TableCreateTHEAD();
   }
 
-  function AppendTableBody(index, row_CPK, row_data_json) {
-    row_data_json = typeof row_data_json !== 'undefined' ? row_data_json : 'N/A';
+  function AppendTableBody(index, row_CPK, row_data) {
+    row_data = typeof row_data !== 'undefined' ? row_data : 'N/A';
 
     var html = '<tr data-position="' + index + '">';
     html = html + '<th scope="row">' + index + '</th>';
     html = html + '<td>' + row_CPK + '</td>';
-    html = html + '<td style="word-wrap: break-word;min-width: 160px;max-width: 160px;">' + row_data_json + '</td>';
+    html = html + '<td style="word-wrap: break-word;min-width: 160px;max-width: 160px;">' + row_data + '</td>';
     html = html + '</tr>';
 
     var table = Table();
@@ -80,9 +80,9 @@ var InternationInjuryAndDiseaseManager = (function () {
   }
 
   var addToList = function (row_CPK, index) {
-    var row_data_json_hash = ContractObject.GetTableRowDataHash(row_CPK);
-    var row_data_json = ContractObject.GetTableRowDataJson(row_CPK, row_data_json_hash);
-    AppendTableBody(index, row_CPK, row_data_json);
+    var row_data_hash = ContractObject.GetTableRowDataHash(row_CPK);
+    var row_data = ContractObject.GetTableRowData(row_CPK, row_data_hash);
+    AppendTableBody(index, row_CPK, row_data);
   }
 
   function ReloadList() {
@@ -105,14 +105,14 @@ var InternationInjuryAndDiseaseManager = (function () {
       addBoldToLog('[開始] ' + function_name);
 
       var row_CPK = $("#" + div_ID + " .row_CPK").val();
-      var row_data_json = $("#" + div_ID + " .row_data_json").val();
+      var row_data = $("#" + div_ID + " .row_data").val();
 
       var start_date = moment();
       addMomentToLog(start_date);
 
       addCodeToLog('row_CPK = ' + row_CPK);
-      addCodeToLog('row_data_json = ' + row_data_json);
-      addCodeToLog(ContractObject_name + "." + set_function + "(row_CPK, row_data_json, {gas: 4141592});");
+      addCodeToLog('row_data = ' + row_data);
+      addCodeToLog(ContractObject_name + "." + set_function + "(row_CPK, row_data, {gas: 4141592});");
       addBarToLog();
 
       var event_listener = ContractObject[set_event]({
@@ -141,7 +141,7 @@ var InternationInjuryAndDiseaseManager = (function () {
         event_listener.stopWatching();
       });
 
-      var txHash = ContractObject[set_function](row_CPK, row_data_json, {gas: 4141592});
+      var txHash = ContractObject[set_function](row_CPK, row_data, {gas: 4141592});
       addBoldToLog('[Pending] ' + function_name);
 
       var pending_date = moment();
