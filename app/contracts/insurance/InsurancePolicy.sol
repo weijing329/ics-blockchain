@@ -1,28 +1,24 @@
 pragma solidity ^0.4.6;
-contract InsurancePolicy {
+
+import "base_class/TableRowDataStorage.sol";
+
+contract InsurancePolicy is TableRowDataStorage {
 
   struct S_InsurancePolicy {
-    bytes32 row_hash;
     address contract_address;
   }
 
-  // composite_key : string = insurance_policy_ID
-  // row_hash : bytes32 = web3.sha3({row_json})
+  // row_CPK : string = insurance_policy_ID
   mapping (string => S_InsurancePolicy) private cpk_S_InsurancePolicy;
 
-  // composite_key_hash = keccak256(composite_key)
-  event e_SetInsurancePolicy(bytes32 indexed composite_key_hash, bytes32 row_hash);
-  function SetInsurancePolicy(string composite_key, bytes32 row_hash, address contract_address) {
-    cpk_S_InsurancePolicy[composite_key] = S_InsurancePolicy(row_hash, contract_address);
-
-    e_SetInsurancePolicy(keccak256(composite_key), row_hash);
+  // for API
+  function SetInsurancePolicy(string row_CPK, string row_data, address contract_address) {
+    TableRowDataStorage.SetTableRowData(row_CPK, row_data);
+    cpk_S_InsurancePolicy[row_CPK] = S_InsurancePolicy(contract_address);
   }
 
-  function Get_row_hash(string composite_key) constant returns (bytes32) {
-    return cpk_S_InsurancePolicy[composite_key].row_hash;
-  }
-
-  function Get_contract_address(string composite_key) constant returns (address) {
-    return cpk_S_InsurancePolicy[composite_key].contract_address;
+  // for other Contract
+  function Get_contract_address(string row_CPK) constant returns (address) {
+    return cpk_S_InsurancePolicy[row_CPK].contract_address;
   }
 }

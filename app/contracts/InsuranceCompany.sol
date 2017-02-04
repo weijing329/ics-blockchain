@@ -116,20 +116,20 @@ contract InsuranceCompany {
   // }
   // // ^^^^^ 【醫療記錄】^^^^^ 
 
-  /////////////////////////////////////////////////////////////////////////////
-  // vvvvv 【保險契約】vvvvv 
-  function SetInsurancePolicy(string composite_key, bytes32 row_hash, address contract_address) {
-    _InsurancePolicy.SetInsurancePolicy(composite_key, row_hash, contract_address);
-  }
+  // /////////////////////////////////////////////////////////////////////////////
+  // // vvvvv 【保險契約】vvvvv 
+  // function SetInsurancePolicy(string composite_key, bytes32 row_hash, address contract_address) {
+  //   _InsurancePolicy.SetInsurancePolicy(composite_key, row_hash, contract_address);
+  // }
 
-  function InsurancePolicy_row_hash(string composite_key) constant returns (bytes32) {
-    return _InsurancePolicy.Get_row_hash(composite_key);
-  }
+  // function InsurancePolicy_row_hash(string composite_key) constant returns (bytes32) {
+  //   return _InsurancePolicy.Get_row_hash(composite_key);
+  // }
 
-  function InsurancePolicy_contract_address(string composite_key) constant returns (address) {
-    return _InsurancePolicy.Get_contract_address(composite_key);
-  }
-  // ^^^^^ 【保險契約】^^^^^ 
+  // function InsurancePolicy_contract_address(string composite_key) constant returns (address) {
+  //   return _InsurancePolicy.Get_contract_address(composite_key);
+  // }
+  // // ^^^^^ 【保險契約】^^^^^ 
 
   /////////////////////////////////////////////////////////////////////////////
   // vvvvv 【理賠案件】vvvvv 

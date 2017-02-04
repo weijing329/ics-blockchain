@@ -27,8 +27,8 @@ $(document).ready(function () {
   // 【記錄醫療記錄】
   MedicalRecordManager.Init();
 
-  // 【計算類手術理賠 Type4】
-  CalculateBenefitType4Manager.Init();
+  // // 【計算類手術理賠 Type4】
+  // CalculateBenefitType4Manager.Init();
 
   // 【寫入保險契約】
   InsurancePolicyManager.Init();

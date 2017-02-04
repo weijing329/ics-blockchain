@@ -138,7 +138,7 @@
       <hr>
       <h3> 保險公司／特約醫院 - 醫療記錄 </h3>
       <div class="panel panel-default">
-        <div class="panel-heading">ContractTerm.sol</div>
+        <div class="panel-heading">MedicalRecord.sol</div>
         <table class="table table-sm table-bordered table-striped MedicalRecord">
         </table>
       </div>
@@ -151,7 +151,7 @@
         <p>需要mining</p>
       </div>
       <hr>
-      <h3> 保險公司 - 計算類手術理賠 (簡易版:實做跨合約傳遞查詢結果及計算) </h3>
+      <!--<h3> 保險公司 - 計算類手術理賠 (簡易版:實做跨合約傳遞查詢結果及計算) </h3>
       <div class="panel panel-default">
         <div class="panel-heading">CalculateBenefitType4.sol</div>
         <table class="table table-sm table-bordered table-striped list_calc_type4">
@@ -166,18 +166,18 @@
         <button class="calculate_benefit_type_4 btn btn-primary">計算類手術理賠</button>
         <p>需要mining</p>
       </div>
-      <hr>
+      <hr>-->
       <h3> 保險公司 - 保險契約 </h3>
       <div class="panel panel-default">
         <div class="panel-heading">InsurancePolicy.sol</div>
-        <table class="table table-sm table-bordered table-striped list_insurance_policy">
+        <table class="table table-sm table-bordered table-striped InsurancePolicy">
         </table>
       </div>
-      <div id="set_insurance_policy" class="form-group form-inline">
-        <textarea cols="20" rows="3" class="composite_key form-control" placeholder="composite_key"></textarea>
-        <textarea cols="30" rows="3" class="row_hash form-control" placeholder="row_hash"></textarea>
-        <textarea cols="20" rows="3" class="contract_address form-control" placeholder="contract_address"></textarea>
-        <button class="set_insurance_policy btn btn-primary">寫入保險契約</button>
+      <div id="SetInsurancePolicy" class="form-group form-inline">
+        <textarea cols="20" rows="3" class="row_CPK form-control" placeholder="row_CPK"></textarea>
+        <textarea cols="40" rows="3" class="row_data form-control" placeholder="row_data"></textarea>
+        <textarea cols="40" rows="3" class="contract_address form-control" placeholder="contract_address"></textarea>
+        <button class="SetInsurancePolicy btn btn-primary">寫入保險契約</button>
         <p>需要mining</p>
       </div>
       <hr>

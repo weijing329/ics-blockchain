@@ -6,12 +6,17 @@ var InsurancePolicyManager = (function () {
   // Private
 
   var function_name = '寫入保險契約';
+  var ContractObject = InsurancePolicy._originalContractObject;
+  var ContractObject_name = 'InsurancePolicy';
+  var div_ID = 'SetInsurancePolicy';
+  var set_function = 'SetInsurancePolicy';
+  var set_event = 'e_SetTableRowData';
 
   // Constructor
   function InsurancePolicyManager() {}
 
   function Table() {
-    return $("table.list_insurance_policy");
+    return $("table." + ContractObject_name);
   };
 
   function ClearList() {
@@ -34,8 +39,8 @@ var InsurancePolicyManager = (function () {
   function AppendTableHead() {
     var html = '<tr>';
     html = html + '<th>#</th>';
-    html = html + '<th>composite_key</th>';
-    html = html + '<th>row_hash</th>';
+    html = html + '<th>row_CPK</th>';
+    html = html + '<th>row_data</th>';
     html = html + '<th>contract_address</th>';
     html = html + '</tr>';
 
@@ -43,17 +48,14 @@ var InsurancePolicyManager = (function () {
     TableCreateTHEAD();
   }
 
-  function AppendTableBody(index, composite_key, row_hash, contract_address) {
-    row_hash = typeof row_hash !== 'undefined' ? row_hash : 'N/A';
+  function AppendTableBody(index, row_CPK, row_data, contract_address) {
+    row_data = typeof row_data !== 'undefined' ? row_data : 'N/A';
     contract_address = typeof contract_address !== 'undefined' ? contract_address : '';
 
-    //var row_count = Table().find("tr").length;
-    var row_count = index + 1;
-
-    var html = '<tr data-position="' + row_count + '">';
-    html = html + '<th scope="row">' + row_count + '</th>';
-    html = html + '<td>' + composite_key + '</td>';
-    html = html + '<td style="word-wrap: break-word;min-width: 160px;max-width: 160px;">' + row_hash + '</td>';
+    var html = '<tr data-position="' + index + '">';
+    html = html + '<th scope="row">' + index + '</th>';
+    html = html + '<td>' + row_CPK + '</td>';
+    html = html + '<td style="word-wrap: break-word;min-width: 160px;max-width: 160px;">' + row_data + '</td>';
     html = html + '<td>' + contract_address + '</td>';
     html = html + '</tr>';
 
@@ -80,32 +82,23 @@ var InsurancePolicyManager = (function () {
     return ($(b).data('position')) < ($(a).data('position')) ? 1 : -1;    
   }
 
-  var list_keys = [
-    '1',
-    '2',
-    '3',
-    '4'
-  ];
+  var addToList = function (row_CPK, index) {
+    var row_data_hash = ContractObject.GetTableRowDataHash(row_CPK);
+    var row_data = ContractObject.GetTableRowData(row_CPK, row_data_hash);
+    var contract_address = ContractObject.Get_contract_address(row_CPK);
 
-  var addToList = function (composite_key, index) {
-    InsuranceCompany.InsurancePolicy_row_hash(composite_key).then(function (row_hash) {
-      if (row_hash != 0x0000000000000000000000000000000000000000) {
-        InsuranceCompany.InsurancePolicy_contract_address(composite_key).then(function (contract_address) {
-          AppendTableBody(index, composite_key, row_hash, contract_address);
-        })
-      } else {
-        AppendTableBody(index, composite_key);
-      }
-    });
-  };
+    AppendTableBody(index, row_CPK, row_data, contract_address);
+  }
 
   function ReloadList() {
     ClearList();
     AppendTableHead();
     TableCreateTHEAD();
-    list_keys.forEach(function (composite_key, index) {
-      addToList(composite_key, index);
-    });
+    var row_count = ContractObject.GetRowCount().toNumber();
+    for (var i = 0; i < row_count; i++) {
+      var row_CPK = ContractObject.GetRowKey(i);
+      addToList(row_CPK, i);
+    }
   };
 
   /////////////////////////////////////////////////////////////////////////////////////////////////
@@ -113,24 +106,24 @@ var InsurancePolicyManager = (function () {
   InsurancePolicyManager.prototype.Init = function () {
     // Init
     ReloadList();
-    $("#set_insurance_policy button.set_insurance_policy").click(function () {
+    $("#" + div_ID + " button." + set_function).click(function () {
       addBoldToLog('[開始] ' + function_name);
 
-      var composite_key = $("#set_insurance_policy .composite_key").val();
-      var row_hash = $("#set_insurance_policy .row_hash").val();
-      var contract_address = $("#set_insurance_policy .contract_address").val();
+      var row_CPK = $("#" + div_ID + " .row_CPK").val();
+      var row_data = $("#" + div_ID + " .row_data").val();
+      var contract_address = $("#" + div_ID + " .contract_address").val();
 
       var start_date = moment();
       addMomentToLog(start_date);
 
-      addCodeToLog('composite_key = ' + composite_key);
-      addCodeToLog('row_hash = ' + row_hash);
+      addCodeToLog('row_CPK = ' + row_CPK);
+      addCodeToLog('row_data = ' + row_data);
       addCodeToLog('contract_address = ' + contract_address);
-      addCodeToLog("InsuranceCompany.SetInsurancePolicy(composite_key, row_hash, contract_address);");
+      addCodeToLog(ContractObject_name + "." + set_function + "(row_CPK, row_data, contract_address);");
       addBarToLog();
 
-      var event_listener = InsurancePolicy._originalContractObject.e_SetInsurancePolicy({
-        composite_key_hash: web3.sha3(composite_key)
+      var event_listener = ContractObject[set_event]({
+        row_CPK_hash: web3.sha3(row_CPK)
       });
       event_listener.watch(function (err, logs) {
         if (!err) {
@@ -148,12 +141,6 @@ var InsurancePolicyManager = (function () {
 
           addBarToLog();
 
-          var existing_item_index = list_keys.findIndex(function (item_value) {
-            return item_value == composite_key;
-          });
-          if (existing_item_index == -1) {
-            list_keys.push(composite_key);
-          }
           ReloadList();
         } else {
           addJsonToLog(err);
@@ -161,18 +148,18 @@ var InsurancePolicyManager = (function () {
         event_listener.stopWatching();
       });
 
-      InsuranceCompany.SetInsurancePolicy(composite_key, row_hash, contract_address).then(function (txHash) {
-        addBoldToLog('[Pending] ' + function_name);
+      var txHash = ContractObject[set_function](row_CPK, row_data, contract_address, {gas: 4141592});
+      addBoldToLog('[Pending] ' + function_name);
 
-        var pending_date = moment();
-        addMomentToLog(pending_date);
-        var diff_microseconds = pending_date.diff(start_date);
-        addToLog('time span: ' + diff_microseconds + ' ms');
+      var pending_date = moment();
+      addMomentToLog(pending_date);
+      var diff_microseconds = pending_date.diff(start_date);
+      addToLog('time span: ' + diff_microseconds + ' ms');
 
-        addCodeToLog('txHash: ' + txHash);
-        addJsonToLog(web3.eth.getTransaction(txHash), 'Transaction');
-        addBarToLog();
-      });
+      addCodeToLog('txHash: ' + txHash);
+      addJsonToLog(web3.eth.getTransaction(txHash), 'Transaction');
+      addBarToLog();
+
     });
   };
 
