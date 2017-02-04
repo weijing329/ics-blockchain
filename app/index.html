@@ -123,25 +123,31 @@
       </div>
       <hr>
       <h3> 保險公司 - 契約內容 </h3>
-      <div class="list_contract_term">
+      <div class="panel panel-default">
+        <div class="panel-heading">ContractTerm.sol</div>
+        <table class="table table-sm table-bordered table-striped ContractTerm">
+        </table>
       </div>
-      <div id="set_contract_term" class="form-group form-inline">
-        <textarea cols="40" rows="3" class="composite_key form-control" placeholder="composite_key"></textarea>
-        <textarea cols="40" rows="3" class="contract_term_hash form-control" placeholder="contract_term_hash"></textarea>
+      <div id="SetContractTerm" class="form-group form-inline">
+        <textarea cols="20" rows="3" class="row_CPK form-control" placeholder="row_CPK"></textarea>
+        <textarea cols="40" rows="3" class="row_data form-control" placeholder="row_data"></textarea>
         <textarea cols="40" rows="3" class="claim_adjustment form-control" placeholder="claim_adjustment"></textarea>
-        <button class="set_contract_term btn btn-primary">寫入契約內容</button>
+        <button class="SetContractTerm btn btn-primary">寫入契約內容</button>
         <p>需要mining</p>
       </div>
       <hr>
       <h3> 保險公司／特約醫院 - 醫療記錄 </h3>
-      <div class="list_medical_record">
+      <div class="panel panel-default">
+        <div class="panel-heading">ContractTerm.sol</div>
+        <table class="table table-sm table-bordered table-striped MedicalRecord">
+        </table>
       </div>
-      <div id="set_medical_record" class="form-group form-inline">
-        <textarea cols="40" rows="3" class="medical_record_ID form-control" placeholder="medical_record_ID"></textarea>
-        <textarea cols="40" rows="3" class="medical_record_hash form-control" placeholder="medical_record_hash"></textarea>
+      <div id="SetMedicalRecord" class="form-group form-inline">
+        <textarea cols="20" rows="3" class="row_CPK form-control" placeholder="row_CPK"></textarea>
+        <textarea cols="40" rows="3" class="row_data form-control" placeholder="row_data"></textarea>
         <textarea cols="40" rows="3" class="hospital_days form-control" placeholder="hospital_days"></textarea>
         <textarea cols="40" rows="3" class="fee form-control" placeholder="fee"></textarea>
-        <button class="set_medical_record btn btn-primary">寫入醫療記錄</button>
+        <button class="SetMedicalRecord btn btn-primary">寫入醫療記錄</button>
         <p>需要mining</p>
       </div>
       <hr>

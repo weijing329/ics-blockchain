@@ -22,7 +22,7 @@ $(document).ready(function () {
   EnrollmentManager.Init();
 
   // 【記錄契約內容】
-  InitContractTerm();
+  ContractTermManager.Init();
 
   // 【記錄醫療記錄】
   MedicalRecordManager.Init();

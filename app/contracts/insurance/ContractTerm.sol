@@ -1,24 +1,24 @@
 pragma solidity ^0.4.6;
-contract ContractTerm {
-  // composite_key : string = insurance_policy_ID|benefit_item_ID
-  // ContractTermHash : bytes32 = web3.sha3({ContractTerm_json})
-  mapping (string => bytes32) private cpk_ContractTerm_hash;
-  mapping (string => uint) private cpk_claim_adjustment; // decimal(19,9)x9
 
-  // composite_key_hash = keccak256(composite_key)
-  event e_SetContractTerm(bytes32 indexed composite_key_hash, bytes32 contract_term_hash);
-  function SetContractTerm(string composite_key, bytes32 contract_term_hash, uint claim_adjustment) {
-    cpk_ContractTerm_hash[composite_key] = contract_term_hash;
-    cpk_claim_adjustment[composite_key] = claim_adjustment;
+import "base_class/TableRowDataStorage.sol";
 
-    e_SetContractTerm(keccak256(composite_key), contract_term_hash);
+contract ContractTerm is TableRowDataStorage {
+
+  struct S_ContractTerm {
+    uint claim_adjustment; // Decimal(19,9)x9
   }
 
-  function GetContractTerm(string composite_key) constant returns (bytes32) {
-    return cpk_ContractTerm_hash[composite_key];
+  // row_CPK : string = insurance_policy_ID|benefit_item_ID
+  mapping (string => S_ContractTerm) private cpk_S_ContractTerm;
+
+  // for API
+  function SetContractTerm(string row_CPK, string row_data, uint claim_adjustment) {
+    TableRowDataStorage.SetTableRowData(row_CPK, row_data);
+    cpk_S_ContractTerm[row_CPK] = S_ContractTerm(claim_adjustment);
   }
 
-  function Get_claim_adjustment(string composite_key) constant returns (uint) {
-    return cpk_claim_adjustment[composite_key];
+  // for other Contract
+  function Get_claim_adjustment(string row_CPK) constant returns (uint) {
+    return cpk_S_ContractTerm[row_CPK].claim_adjustment;
   }
 }

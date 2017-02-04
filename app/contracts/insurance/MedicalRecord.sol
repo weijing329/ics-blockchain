@@ -1,28 +1,30 @@
 pragma solidity ^0.4.6;
-contract MedicalRecord {
-  // Mdeical_hash : bytes32 = web3.sha3({medical_record_json})
-  mapping (string => bytes32) private id_MedicalRecord_hash;
-  mapping (string => uint) private id_hospital_days;
-  mapping (string => uint) private id_fee;
 
-  event e_SetMedicalRecord(bytes32 indexed medical_record_ID_hash, bytes32 medical_record_hash);
-  function SetMedicalRecord(string medical_record_ID, bytes32 medical_record_hash, uint hospital_days, uint fee) {
-    id_MedicalRecord_hash[medical_record_ID] = medical_record_hash;
-    id_hospital_days[medical_record_ID] = hospital_days;
-    id_fee[medical_record_ID] = fee;
+import "base_class/TableRowDataStorage.sol";
 
-    e_SetMedicalRecord(keccak256(medical_record_ID), medical_record_hash);
+contract MedicalRecord is TableRowDataStorage {
+
+  struct S_MedicalRecord {
+    uint hospital_days; // int
+    uint fee; // Decimal(19,4)x4
   }
 
-  function GetMedicalRecord(string medical_record_ID) constant returns (bytes32) {
-    return id_MedicalRecord_hash[medical_record_ID];
+  // row_CPK : string = medical_record_ID
+  mapping (string => S_MedicalRecord) private cpk_S_MedicalRecord;
+
+  // for API
+  function SetMedicalRecord(string row_CPK, string row_data, uint hospital_days, uint fee) {
+    TableRowDataStorage.SetTableRowData(row_CPK, row_data);
+    cpk_S_MedicalRecord[row_CPK] = S_MedicalRecord(hospital_days, fee);
   }
 
-  function Get_hospital_days(string medical_record_ID) constant returns (uint) {
-    return id_hospital_days[medical_record_ID];
+  // for other Contract
+  function Get_hospital_days(string row_CPK) constant returns (uint) {
+    return cpk_S_MedicalRecord[row_CPK].hospital_days;
   }
 
-  function Get_fee(string medical_record_ID) constant returns (uint) {
-    return id_fee[medical_record_ID];
+  // for other Contract
+  function Get_fee(string row_CPK) constant returns (uint) {
+    return cpk_S_MedicalRecord[row_CPK].fee;
   }
 }

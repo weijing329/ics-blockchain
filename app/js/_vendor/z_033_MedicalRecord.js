@@ -6,61 +6,103 @@ var MedicalRecordManager = (function () {
   // Private
 
   var function_name = '寫入醫療記錄';
+  var ContractObject = MedicalRecord._originalContractObject;
+  var ContractObject_name = 'MedicalRecord';
+  var div_ID = 'SetMedicalRecord';
+  var set_function = 'SetMedicalRecord';
+  var set_event = 'e_SetTableRowData';
 
   // Constructor
   function MedicalRecordManager() {}
 
-  function List() {
-    return $("div.list_medical_record");
+  function Table() {
+    return $("table." + ContractObject_name);
   };
 
   function ClearList() {
-    List().html('');
+    Table().html('');
   };
 
-  function AppendList(medical_record_ID, medical_record_hash, hospital_days, fee) {
-    if (typeof medical_record_ID === 'undefined') {
-      List().append('<hr>');
-      return;
+  function TableCreateTHEAD() {
+    var table = Table();
+    var thead = table.find("thead");
+    var thRows =  table.find("tr:has(th)");
+
+    if (thead.length===0){  //if there is no thead element, add one.
+      thead = $("<thead></thead>").appendTo(table);    
     }
-    medical_record_hash = typeof medical_record_hash !== 'undefined' ? medical_record_hash : 'N/A';
+
+    var copy = thRows.clone(true).appendTo(thead);
+    thRows.remove();
+  }
+
+  function AppendTableHead() {
+    var html = '<tr>';
+    html = html + '<th>#</th>';
+    html = html + '<th>row_CPK</th>';
+    html = html + '<th>row_data</th>';
+    html = html + '<th>hospital_days : Int</th>';
+    html = html + '<th>fee : Decimal(19,4)x4</th>';
+    html = html + '</tr>';
+
+    Table().append(html);
+    TableCreateTHEAD();
+  }
+
+  function AppendTableBody(index, row_CPK, row_data, hospital_days, fee) {
+    row_data = typeof row_data !== 'undefined' ? row_data : 'N/A';
     hospital_days = typeof hospital_days !== 'undefined' ? hospital_days : '';
     fee = typeof fee !== 'undefined' ? fee : '';
 
-    var html = '<span style="width:200px; display:inline-block;">' + medical_record_ID + '</span>';
-    html = html + '<span style="width:600px; display:inline-block;">' + medical_record_hash + '</span>';
-    html = html + '<span style="width:200px; display:inline-block;">' + hospital_days + '</span>';
-    html = html + '<span style="width:200px; display:inline-block;">' + fee + '</span>';
+    var html = '<tr data-position="' + index + '">';
+    html = html + '<th scope="row">' + index + '</th>';
+    html = html + '<td>' + row_CPK + '</td>';
+    html = html + '<td style="word-wrap: break-word;min-width: 160px;max-width: 160px;">' + row_data + '</td>';
+    html = html + '<td>' + hospital_days + '</td>';
+    html = html + '<td>' + fee + '</td>';
+    html = html + '</tr>';
 
-    List().append(html).append("<br>");
+    var table = Table();
+    var tbody = table.find("tbody");
+
+    if (tbody.length===0){  //if there is no thead element, add one.
+      tbody = $("<tbody></tbody>").appendTo(table);    
+    }
+
+    $(html).appendTo(tbody);
+    SortTableBody();
   };
 
-  var list_keys = [
-    '1',
-    '2'
-  ];
+  function SortTableBody() {
+    var table = Table();
+    var tbody = table.find("tbody");
+    var tr_sorted = tbody.find("tr").sort(sort_tr_data_position);
+    tbody.find("tr").remove();
+    tr_sorted.appendTo(tbody);
+  }
 
-  var addToList = function (medical_record_ID) {
-    InsuranceCompany.GetMedicalRecord(medical_record_ID).then(function (medical_record_hash) {
-      if (medical_record_hash != 0x0000000000000000000000000000000000000000) {
-        InsuranceCompany.Get_hospital_days(medical_record_ID).then(function (hospital_days) {
-          InsuranceCompany.Get_fee(medical_record_ID).then(function (fee) {
-            AppendList(medical_record_ID, medical_record_hash, hospital_days, fee);
-          })
-        })
-      } else {
-        AppendList(medical_record_ID);
-      }
-    });
-  };
+  function sort_tr_data_position(a, b){
+    return ($(b).data('position')) < ($(a).data('position')) ? 1 : -1;    
+  }
+
+  var addToList = function (row_CPK, index) {
+    var row_data_hash = ContractObject.GetTableRowDataHash(row_CPK);
+    var row_data = ContractObject.GetTableRowData(row_CPK, row_data_hash);
+    var hospital_days = ContractObject.Get_hospital_days(row_CPK);
+    var fee = ContractObject.Get_fee(row_CPK);
+
+    AppendTableBody(index, row_CPK, row_data, hospital_days, fee);
+  }
 
   function ReloadList() {
     ClearList();
-    AppendList('medical_record_ID', 'medical_record_hash', 'hospital_days : Int', 'fee: Int');
-    AppendList();
-    list_keys.forEach(function (medical_record_ID) {
-      addToList(medical_record_ID);
-    });
+    AppendTableHead();
+    TableCreateTHEAD();
+    var row_count = ContractObject.GetRowCount().toNumber();
+    for (var i = 0; i < row_count; i++) {
+      var row_CPK = ContractObject.GetRowKey(i);
+      addToList(row_CPK, i);
+    }
   };
 
   /////////////////////////////////////////////////////////////////////////////////////////////////
@@ -69,26 +111,26 @@ var MedicalRecordManager = (function () {
   MedicalRecordManager.prototype.Init = function () {
     // Init
     ReloadList();
-    $("#set_medical_record button.set_medical_record").click(function () {
+    $("#" + div_ID + " button." + set_function).click(function () {
       addBoldToLog('[開始] ' + function_name);
 
-      var medical_record_ID = $("#set_medical_record .medical_record_ID").val();
-      var medical_record_hash = $("#set_medical_record .medical_record_hash").val();
-      var hospital_days = $("#set_medical_record .hospital_days").val();
-      var fee = $("#set_medical_record .fee").val();
+      var row_CPK = $("#" + div_ID + " .row_CPK").val();
+      var row_data = $("#" + div_ID + " .row_data").val();
+      var hospital_days = $("#" + div_ID + " .hospital_days").val();
+      var fee = $("#" + div_ID + " .fee").val();
 
       var start_date = moment();
       addMomentToLog(start_date);
 
-      addCodeToLog('medical_record_ID = ' + medical_record_ID);
-      addCodeToLog('medical_record_hash = ' + medical_record_hash);
+      addCodeToLog('row_CPK = ' + row_CPK);
+      addCodeToLog('row_data = ' + row_data);
       addCodeToLog('hospital_days = ' + hospital_days);
       addCodeToLog('fee = ' + fee);
-      addCodeToLog("InsuranceCompany.SetMedicalRecord(medical_record_ID, medical_record_hash, hospital_days, fee);");
+      addCodeToLog(ContractObject_name + "." + set_function + "(row_CPK, row_data, hospital_days, fee);");
       addBarToLog();
 
-      var event_listener = MedicalRecord._originalContractObject.e_SetMedicalRecord({
-        medical_record_ID: web3.sha3(medical_record_ID)
+      var event_listener = ContractObject[set_event]({
+        row_CPK_hash: web3.sha3(row_CPK)
       });
       event_listener.watch(function (err, logs) {
         if (!err) {
@@ -106,12 +148,6 @@ var MedicalRecordManager = (function () {
 
           addBarToLog();
 
-          var existing_item_index = list_keys.findIndex(function (item_value) {
-            return item_value == medical_record_ID;
-          });
-          if (existing_item_index == -1) {
-            list_keys.push(medical_record_ID);
-          }
           ReloadList();
         } else {
           addJsonToLog(err);
@@ -119,18 +155,18 @@ var MedicalRecordManager = (function () {
         event_listener.stopWatching();
       });
 
-      InsuranceCompany.SetMedicalRecord(medical_record_ID, medical_record_hash, hospital_days, fee).then(function (txHash) {
-        addBoldToLog('[Pending] ' + function_name);
+      var txHash = ContractObject[set_function](row_CPK, row_data, hospital_days, fee, {gas: 4141592});
+      addBoldToLog('[Pending] ' + function_name);
 
-        var pending_date = moment();
-        addMomentToLog(pending_date);
-        var diff_microseconds = pending_date.diff(start_date);
-        addToLog('time span: ' + diff_microseconds + ' ms');
+      var pending_date = moment();
+      addMomentToLog(pending_date);
+      var diff_microseconds = pending_date.diff(start_date);
+      addToLog('time span: ' + diff_microseconds + ' ms');
 
-        addCodeToLog('txHash: ' + txHash);
-        addJsonToLog(web3.eth.getTransaction(txHash), 'Transaction');
-        addBarToLog();
-      });
+      addCodeToLog('txHash: ' + txHash);
+      addJsonToLog(web3.eth.getTransaction(txHash), 'Transaction');
+      addBarToLog();
+
     });
   };
 

@@ -41,8 +41,8 @@ var EnrollmentManager = (function () {
     html = html + '<th>#</th>';
     html = html + '<th>row_CPK</th>';
     html = html + '<th>row_data</th>';
-    html = html + '<th>daily_benefit_amount</th>';
-    html = html + '<th>policy_claimable_amount</th>';
+    html = html + '<th>daily_benefit_amount : Int</th>';
+    html = html + '<th>policy_claimable_amount : Int</th>';
     html = html + '</tr>';
 
     Table().append(html);
@@ -126,7 +126,7 @@ var EnrollmentManager = (function () {
       addCodeToLog('row_data = ' + row_data);
       addCodeToLog('daily_benefit_amount = ' + daily_benefit_amount);
       addCodeToLog('policy_claimable_amount = ' + policy_claimable_amount);
-      addCodeToLog(ContractObject_name + "." + set_function + "(composite_key, enrollment_hash, daily_benefit_amount, policy_claimable_amount);");
+      addCodeToLog(ContractObject_name + "." + set_function + "(row_CPK, row_data, daily_benefit_amount, policy_claimable_amount);");
       addBarToLog();
 
       var event_listener = ContractObject[set_event]({

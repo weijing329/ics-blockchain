@@ -82,39 +82,39 @@ contract InsuranceCompany {
   // }
   // // ^^^^^ 【註冊保戶保單】^^^^^ 
 
-  /////////////////////////////////////////////////////////////////////////////
-  // vvvvv 【契約內容】vvvvv 
-  function SetContractTerm(string composite_key, bytes32 contract_term_hash, uint claim_adjustment) {
-    _ContractTerm.SetContractTerm(composite_key, contract_term_hash, claim_adjustment);
-  }
+  // /////////////////////////////////////////////////////////////////////////////
+  // // vvvvv 【契約內容】vvvvv 
+  // function SetContractTerm(string composite_key, bytes32 contract_term_hash, uint claim_adjustment) {
+  //   _ContractTerm.SetContractTerm(composite_key, contract_term_hash, claim_adjustment);
+  // }
 
-  function GetContractTerm(string composite_key) constant returns (bytes32) {
-    return _ContractTerm.GetContractTerm(composite_key);
-  }
+  // function GetContractTerm(string composite_key) constant returns (bytes32) {
+  //   return _ContractTerm.GetContractTerm(composite_key);
+  // }
 
-  function Get_claim_adjustment(string composite_key) constant returns (uint) {
-    return _ContractTerm.Get_claim_adjustment(composite_key);
-  }
-  // ^^^^^ 【契約內容】^^^^^ 
+  // function Get_claim_adjustment(string composite_key) constant returns (uint) {
+  //   return _ContractTerm.Get_claim_adjustment(composite_key);
+  // }
+  // // ^^^^^ 【契約內容】^^^^^ 
 
-  /////////////////////////////////////////////////////////////////////////////
-  // vvvvv 【醫療記錄】vvvvv 
-  function SetMedicalRecord(string medical_record_ID, bytes32 medical_record_hash, uint hospital_days, uint fee) {
-    _MedicalRecord.SetMedicalRecord(medical_record_ID, medical_record_hash, hospital_days, fee);
-  }
+  // /////////////////////////////////////////////////////////////////////////////
+  // // vvvvv 【醫療記錄】vvvvv 
+  // function SetMedicalRecord(string medical_record_ID, bytes32 medical_record_hash, uint hospital_days, uint fee) {
+  //   _MedicalRecord.SetMedicalRecord(medical_record_ID, medical_record_hash, hospital_days, fee);
+  // }
 
-  function GetMedicalRecord(string medical_record_ID) constant returns (bytes32) {
-    return _MedicalRecord.GetMedicalRecord(medical_record_ID);
-  }
+  // function GetMedicalRecord(string medical_record_ID) constant returns (bytes32) {
+  //   return _MedicalRecord.GetMedicalRecord(medical_record_ID);
+  // }
 
-  function Get_hospital_days(string medical_record_ID) constant returns (uint) {
-    return _MedicalRecord.Get_hospital_days(medical_record_ID);
-  }
+  // function Get_hospital_days(string medical_record_ID) constant returns (uint) {
+  //   return _MedicalRecord.Get_hospital_days(medical_record_ID);
+  // }
 
-  function Get_fee(string medical_record_ID) constant returns (uint) {
-    return _MedicalRecord.Get_fee(medical_record_ID);
-  }
-  // ^^^^^ 【醫療記錄】^^^^^ 
+  // function Get_fee(string medical_record_ID) constant returns (uint) {
+  //   return _MedicalRecord.Get_fee(medical_record_ID);
+  // }
+  // // ^^^^^ 【醫療記錄】^^^^^ 
 
   /////////////////////////////////////////////////////////////////////////////
   // vvvvv 【保險契約】vvvvv 
