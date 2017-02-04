@@ -63,24 +63,24 @@ contract InsuranceCompany {
     }
   }
 
-  /////////////////////////////////////////////////////////////////////////////
-  // vvvvv 【註冊保戶保單】vvvvv 
-  function SetEnrollment(string composite_key, bytes32 enrollment_hash, uint daily_benefit_amount, uint policy_claimable_amount) {
-    _Enrollment.SetEnrollment(composite_key, enrollment_hash, daily_benefit_amount, policy_claimable_amount);
-  }
+  // /////////////////////////////////////////////////////////////////////////////
+  // // vvvvv 【註冊保戶保單】vvvvv 
+  // function SetEnrollment(string composite_key, bytes32 enrollment_hash, uint daily_benefit_amount, uint policy_claimable_amount) {
+  //   _Enrollment.SetEnrollment(composite_key, enrollment_hash, daily_benefit_amount, policy_claimable_amount);
+  // }
 
-  function GetEnrollment(string composite_key) constant returns (bytes32) {
-    return _Enrollment.GetEnrollment(composite_key);
-  }
+  // function GetEnrollment(string composite_key) constant returns (bytes32) {
+  //   return _Enrollment.GetEnrollment(composite_key);
+  // }
 
-  function Get_daily_benefit_amount(string composite_key) constant returns (uint) {
-    return _Enrollment.Get_daily_benefit_amount(composite_key);
-  }
+  // function Get_daily_benefit_amount(string composite_key) constant returns (uint) {
+  //   return _Enrollment.Get_daily_benefit_amount(composite_key);
+  // }
 
-  function Get_policy_claimable_amount(string composite_key) constant returns (uint) {
-    return _Enrollment.Get_policy_claimable_amount(composite_key);
-  }
-  // ^^^^^ 【註冊保戶保單】^^^^^ 
+  // function Get_policy_claimable_amount(string composite_key) constant returns (uint) {
+  //   return _Enrollment.Get_policy_claimable_amount(composite_key);
+  // }
+  // // ^^^^^ 【註冊保戶保單】^^^^^ 
 
   /////////////////////////////////////////////////////////////////////////////
   // vvvvv 【契約內容】vvvvv 

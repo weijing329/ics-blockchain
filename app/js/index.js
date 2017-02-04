@@ -15,8 +15,8 @@ $(document).ready(function () {
   // [寫入國際傷疾病代碼]
   InternationInjuryAndDiseaseManager.Init();
 
-  // 【保險公司】
-  InsuranceCompanyContractsManager.Init();
+  // // 【保險公司】
+  // InsuranceCompanyContractsManager.Init();
 
   // 【註冊保戶保單】
   EnrollmentManager.Init();

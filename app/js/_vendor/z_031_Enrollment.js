@@ -6,12 +6,17 @@ var EnrollmentManager = (function () {
   // Private
 
   var function_name = '註冊保戶保單';
+  var ContractObject = Enrollment._originalContractObject;
+  var ContractObject_name = 'Enrollment';
+  var div_ID = 'SetEnrollment';
+  var set_function = 'SetEnrollment';
+  var set_event = 'e_SetTableRowData';
 
   // Constructor
   function EnrollmentManager() {}
 
   function Table() {
-    return $("table.list_enrollment");
+    return $("table." + ContractObject_name);
   };
 
   function ClearList() {
@@ -31,30 +36,28 @@ var EnrollmentManager = (function () {
     thRows.remove();
   }
 
-  function AppendTableHead(enrollment_CPK, enrollment_hash, daily_benefit_amount, policy_claimable_amount) {
+  function AppendTableHead() {
     var html = '<tr>';
     html = html + '<th>#</th>';
-    html = html + '<th>' + enrollment_CPK + '</th>';
-    html = html + '<th>' + enrollment_hash + '</th>';
-    html = html + '<th>' + daily_benefit_amount + '</th>';
-    html = html + '<th>' + policy_claimable_amount + '</th>';
+    html = html + '<th>row_CPK</th>';
+    html = html + '<th>row_data</th>';
+    html = html + '<th>daily_benefit_amount</th>';
+    html = html + '<th>policy_claimable_amount</th>';
     html = html + '</tr>';
 
     Table().append(html);
+    TableCreateTHEAD();
   }
 
-  function AppendTableBody(index, enrollment_CPK, enrollment_hash, daily_benefit_amount, policy_claimable_amount) {
-    enrollment_hash = typeof enrollment_hash !== 'undefined' ? enrollment_hash : 'N/A';
+  function AppendTableBody(index, row_CPK, row_data, daily_benefit_amount, policy_claimable_amount) {
+    row_data = typeof row_data !== 'undefined' ? row_data : 'N/A';
     daily_benefit_amount = typeof daily_benefit_amount !== 'undefined' ? daily_benefit_amount : '';
     policy_claimable_amount = typeof policy_claimable_amount !== 'undefined' ? policy_claimable_amount : '';
 
-    //var row_count = Table().find("tr").length;
-    var row_count = index + 1;
-
-    var html = '<tr data-position="' + row_count + '">';
-    html = html + '<th scope="row">' + row_count + '</th>';
-    html = html + '<td>' + enrollment_CPK + '</td>';
-    html = html + '<td style="word-wrap: break-word;min-width: 160px;max-width: 160px;">' + enrollment_hash + '</td>';
+    var html = '<tr data-position="' + index + '">';
+    html = html + '<th scope="row">' + index + '</th>';
+    html = html + '<td>' + row_CPK + '</td>';
+    html = html + '<td style="word-wrap: break-word;min-width: 160px;max-width: 160px;">' + row_data + '</td>';
     html = html + '<td>' + daily_benefit_amount + '</td>';
     html = html + '<td>' + policy_claimable_amount + '</td>';
     html = html + '</tr>';
@@ -82,32 +85,24 @@ var EnrollmentManager = (function () {
     return ($(b).data('position')) < ($(a).data('position')) ? 1 : -1;    
   }
 
-  var list_keys = [
-    '1|1|1',
-    '2|2|2'
-  ];
+  var addToList = function (row_CPK, index) {
+    var row_data_hash = ContractObject.GetTableRowDataHash(row_CPK);
+    var row_data = ContractObject.GetTableRowData(row_CPK, row_data_hash);
+    var daily_benefit_amount = ContractObject.Get_daily_benefit_amount(row_CPK);
+    var policy_claimable_amount = ContractObject.Get_policy_claimable_amount(row_CPK);
 
-  var addToList = function (enrollment_CPK, index) {
-    InsuranceCompany.GetEnrollment(enrollment_CPK).then(function (enrollment_hash) {
-      if (enrollment_hash != 0x0000000000000000000000000000000000000000) {
-        InsuranceCompany.Get_daily_benefit_amount(enrollment_CPK).then(function (daily_benefit_amount) {
-          InsuranceCompany.Get_policy_claimable_amount(enrollment_CPK).then(function (policy_claimable_amount) {
-            AppendTableBody(index, enrollment_CPK, enrollment_hash, daily_benefit_amount, policy_claimable_amount);
-          })
-        })
-      } else {
-        AppendTableBody(index, enrollment_CPK);
-      }
-    });
-  };
+    AppendTableBody(index, row_CPK, row_data, daily_benefit_amount, policy_claimable_amount);
+  }
 
   function ReloadList() {
     ClearList();
-    AppendTableHead('enrollment_CPK', 'enrollment_hash', 'daily_benefit_amount : Int', 'policy_claimable_amount: Int');
+    AppendTableHead();
     TableCreateTHEAD();
-    list_keys.forEach(function (enrollment_CPK, index) {
-      addToList(enrollment_CPK, index);
-    });
+    var row_count = ContractObject.GetRowCount().toNumber();
+    for (var i = 0; i < row_count; i++) {
+      var row_CPK = ContractObject.GetRowKey(i);
+      addToList(row_CPK, i);
+    }
   };
 
   /////////////////////////////////////////////////////////////////////////////////////////////////
@@ -116,26 +111,26 @@ var EnrollmentManager = (function () {
   EnrollmentManager.prototype.Init = function () {
     // Init
     ReloadList();
-    $("#set_enrollment button.set_enrollment").click(function () {
+    $("#" + div_ID + " button." + set_function).click(function () {
       addBoldToLog('[開始] ' + function_name);
 
-      var composite_key = $("#set_enrollment .composite_key").val();
-      var enrollment_hash = $("#set_enrollment .enrollment_hash").val();
-      var daily_benefit_amount = $("#set_enrollment .daily_benefit_amount").val();
-      var policy_claimable_amount = $("#set_enrollment .policy_claimable_amount").val();
+      var row_CPK = $("#" + div_ID + " .row_CPK").val();
+      var row_data = $("#" + div_ID + " .row_data").val();
+      var daily_benefit_amount = $("#" + div_ID + " .daily_benefit_amount").val();
+      var policy_claimable_amount = $("#" + div_ID + " .policy_claimable_amount").val();
 
       var start_date = moment();
       addMomentToLog(start_date);
 
-      addCodeToLog('composite_key = ' + composite_key);
-      addCodeToLog('enrollment_hash = ' + enrollment_hash);
+      addCodeToLog('row_CPK = ' + row_CPK);
+      addCodeToLog('row_data = ' + row_data);
       addCodeToLog('daily_benefit_amount = ' + daily_benefit_amount);
       addCodeToLog('policy_claimable_amount = ' + policy_claimable_amount);
-      addCodeToLog("InsuranceCompany.SetEnrollment(composite_key, enrollment_hash, daily_benefit_amount, policy_claimable_amount);");
+      addCodeToLog(ContractObject_name + "." + set_function + "(composite_key, enrollment_hash, daily_benefit_amount, policy_claimable_amount);");
       addBarToLog();
 
-      var event_listener = Enrollment._originalContractObject.e_SetEnrollment({
-        composite_key_hash: web3.sha3(composite_key)
+      var event_listener = ContractObject[set_event]({
+        row_CPK_hash: web3.sha3(row_CPK)
       });
       event_listener.watch(function (err, logs) {
         if (!err) {
@@ -153,12 +148,6 @@ var EnrollmentManager = (function () {
 
           addBarToLog();
 
-          var existing_item_index = list_keys.findIndex(function (item_value) {
-            return item_value == composite_key;
-          });
-          if (existing_item_index == -1) {
-            list_keys.push(composite_key);
-          }
           ReloadList();
         } else {
           addJsonToLog(err);
@@ -166,18 +155,18 @@ var EnrollmentManager = (function () {
         event_listener.stopWatching();
       });
 
-      InsuranceCompany.SetEnrollment(composite_key, enrollment_hash, daily_benefit_amount, policy_claimable_amount).then(function (txHash) {
-        addBoldToLog('[Pending] ' + function_name);
+      var txHash = ContractObject[set_function](row_CPK, row_data, daily_benefit_amount, policy_claimable_amount, {gas: 4141592});
+      addBoldToLog('[Pending] ' + function_name);
 
-        var pending_date = moment();
-        addMomentToLog(pending_date);
-        var diff_microseconds = pending_date.diff(start_date);
-        addToLog('time span: ' + diff_microseconds + ' ms');
+      var pending_date = moment();
+      addMomentToLog(pending_date);
+      var diff_microseconds = pending_date.diff(start_date);
+      addToLog('time span: ' + diff_microseconds + ' ms');
 
-        addCodeToLog('txHash: ' + txHash);
-        addJsonToLog(web3.eth.getTransaction(txHash), 'Transaction');
-        addBarToLog();
-      });
+      addCodeToLog('txHash: ' + txHash);
+      addJsonToLog(web3.eth.getTransaction(txHash), 'Transaction');
+      addBarToLog();
+
     });
   };
 
