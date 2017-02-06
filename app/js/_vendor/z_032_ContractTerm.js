@@ -39,9 +39,9 @@ var ContractTermManager = (function () {
   function AppendTableHead() {
     var html = '<tr>';
     html = html + '<th>#</th>';
-    html = html + '<th>row_CPK</th>';
+    html = html + '<th>row_CPK<br>保險契約ID | 給付項目ID</th>';
     html = html + '<th>row_data</th>';
-    html = html + '<th>claim_adjustment : Decimal(19,9)x9</th>';
+    html = html + '<th>claim_adjustment : Decimal(19,9)x9<br>理賠倍率</th>';
     html = html + '</tr>';
 
     Table().append(html);

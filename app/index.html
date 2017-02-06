@@ -184,18 +184,25 @@
       <h3> 保險公司 - 理賠案件 </h3>
       <div class="panel panel-default">
         <div class="panel-heading">ClaimRecord.sol</div>
-        <table class="table table-sm table-bordered table-striped list_claim_record">
+        <table class="table table-sm table-bordered table-striped ClaimRecord">
         </table>
       </div>
-      <div id="set_claim_record" class="form-group form-inline">
-        <textarea cols="20" rows="3" class="composite_key form-control" placeholder="composite_key"></textarea>
-        <textarea cols="30" rows="3" class="row_hash form-control" placeholder="row_hash"></textarea>
+      <div id="SetClaimRecord" class="form-group form-inline">
+        <textarea cols="20" rows="3" class="row_CPK form-control" placeholder="row_CPK"></textarea>
+        <textarea cols="30" rows="3" class="row_data form-control" placeholder="row_data"></textarea>
         <textarea cols="20" rows="3" class="insured_person_ID form-control" placeholder="insured_person_ID"></textarea>
         <textarea cols="20" rows="3" class="medical_record_ID form-control" placeholder="medical_record_ID"></textarea>
         <textarea cols="20" rows="3" class="eligible_benefit_amount form-control" placeholder="eligible_benefit_amount"></textarea>
-        <textarea cols="20" rows="3" class="claim_paid_TR_ID form-control" placeholder="claim_paid_TR_ID"></textarea>
         <textarea cols="20" rows="3" class="status_code form-control" placeholder="status_code"></textarea>
-        <button class="set_claim_record btn btn-primary">寫入理賠案件</button>
+        <button class="SetClaimRecord btn btn-primary">寫入理賠案件</button>
+        <p>需要mining</p>
+      </div>
+      <div id="CalculateBenefit" class="form-group form-inline">
+        <textarea cols="20" rows="3" class="row_CPK form-control" placeholder="row_CPK"></textarea>
+        <textarea cols="20" rows="3" class="insurance_policy_package_ID form-control" placeholder="insurance_policy_package_ID"></textarea>
+        <textarea cols="20" rows="3" class="insurance_policy_ID form-control" placeholder="insurance_policy_ID"></textarea>
+        <textarea cols="20" rows="3" class="benefit_item_ID form-control" placeholder="benefit_item_ID"></textarea>
+        <button class="CalculateBenefit btn btn-primary">計算理賠金額</button>
         <p>需要mining</p>
       </div>
     </div>

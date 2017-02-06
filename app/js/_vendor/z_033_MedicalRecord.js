@@ -39,10 +39,10 @@ var MedicalRecordManager = (function () {
   function AppendTableHead() {
     var html = '<tr>';
     html = html + '<th>#</th>';
-    html = html + '<th>row_CPK</th>';
+    html = html + '<th>row_CPK<br>醫療記錄ID</th>';
     html = html + '<th>row_data</th>';
-    html = html + '<th>hospital_days : Int</th>';
-    html = html + '<th>fee : Decimal(19,4)x4</th>';
+    html = html + '<th>hospital_days : Int<br>住院天數</th>';
+    html = html + '<th>fee : Decimal(19,4)x4<br>醫療費用</th>';
     html = html + '</tr>';
 
     Table().append(html);

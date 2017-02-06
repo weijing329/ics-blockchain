@@ -39,9 +39,9 @@ var InsurancePolicyManager = (function () {
   function AppendTableHead() {
     var html = '<tr>';
     html = html + '<th>#</th>';
-    html = html + '<th>row_CPK</th>';
+    html = html + '<th>row_CPK<br>保險契約ID</th>';
     html = html + '<th>row_data</th>';
-    html = html + '<th>contract_address</th>';
+    html = html + '<th>contract_address<br>契約條款智能合約地址</th>';
     html = html + '</tr>';
 
     Table().append(html);

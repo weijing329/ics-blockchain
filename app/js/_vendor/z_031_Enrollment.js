@@ -39,10 +39,10 @@ var EnrollmentManager = (function () {
   function AppendTableHead() {
     var html = '<tr>';
     html = html + '<th>#</th>';
-    html = html + '<th>row_CPK</th>';
+    html = html + '<th>row_CPK<br>被保險人ID | 保單ID | 保險契約ID</th>';
     html = html + '<th>row_data</th>';
-    html = html + '<th>daily_benefit_amount : Int</th>';
-    html = html + '<th>policy_claimable_amount : Int</th>';
+    html = html + '<th>daily_benefit_amount : Int<br>日額保險金</th>';
+    html = html + '<th>policy_claimable_amount : Int<br>保險契約可理賠額度</th>';
     html = html + '</tr>';
 
     Table().append(html);

@@ -9,16 +9,16 @@ contract PolicyCalculationType4 is PolicyCalculation {
   // daily_benefit_amount : Int
   // policy_claimable_amount: Int
   // hospital_days : Int
-  // fee: Int
+  // fee : Decimal(19,4)x4
   // claim_adjustment : Decimal(19,9)x9
-  // return Decimal(19,9)x9
+  // return Decimal(19,4)x4
   function Calculate(uint daily_benefit_amount, uint policy_claimable_amount, uint hospital_days, uint fee, uint claim_adjustment) returns(uint) {
-    uint a1 = maths.Min(fee, policy_claimable_amount);
-    uint a2 = daily_benefit_amount * hospital_days;
+    uint a1 = maths.Min(fee, (policy_claimable_amount * 10000)); //x4
+    uint a2 = daily_benefit_amount * hospital_days; //x1
 
-    uint b1 = maths.Max(a1, a2) * 1000000000;
-    uint b2 = (daily_benefit_amount * claim_adjustment);
+    uint b1 = maths.Max(a1, (a2*10000)) * 100000; //x9
+    uint b2 = (daily_benefit_amount * claim_adjustment); //x9
 
-    return b1 + b2;
+    return (b1 + b2) / 100000; //x4
   }
 }

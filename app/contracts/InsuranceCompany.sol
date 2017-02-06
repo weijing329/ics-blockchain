@@ -131,49 +131,49 @@ contract InsuranceCompany {
   // }
   // // ^^^^^ 【保險契約】^^^^^ 
 
-  /////////////////////////////////////////////////////////////////////////////
-  // vvvvv 【理賠案件】vvvvv 
-  function SetClaimRecord(string composite_key, bytes32 row_hash, string insured_person_ID, string medical_record_ID, uint eligible_benefit_amount, string claim_paid_TR_ID, uint status_code) {
-    _ClaimRecord.SetClaimRecord(composite_key, row_hash, insured_person_ID, medical_record_ID, eligible_benefit_amount, claim_paid_TR_ID, status_code);
-  }
-
-  function ClaimRecord_row_hash(string composite_key) constant returns (bytes32) {
-    return _ClaimRecord.Get_row_hash(composite_key);
-  }
-
-  function ClaimRecord_insured_person_ID(string composite_key) constant returns (string) {
-    string memory insured_person_ID = ConvertTypes.Bytes32ToString(_ClaimRecord.Get_insured_person_ID_Bytes32(composite_key));
-    return insured_person_ID;
-  }
-
-  // function Get_insured_person_ID_Bytes32(string composite_key) constant returns (bytes32) {
-  //   return ConvertTypes.StringToBytes32(cpk_S_ClaimRecord[composite_key].insured_person_ID);
+  // /////////////////////////////////////////////////////////////////////////////
+  // // vvvvv 【理賠案件】vvvvv 
+  // function SetClaimRecord(string composite_key, bytes32 row_hash, string insured_person_ID, string medical_record_ID, uint eligible_benefit_amount, string claim_paid_TR_ID, uint status_code) {
+  //   _ClaimRecord.SetClaimRecord(composite_key, row_hash, insured_person_ID, medical_record_ID, eligible_benefit_amount, claim_paid_TR_ID, status_code);
   // }
 
-  function ClaimRecord_medical_record_ID(string composite_key) constant returns (string) {
-    string memory medical_record_ID = ConvertTypes.Bytes32ToString(_ClaimRecord.Get_medical_record_ID_Bytes32(composite_key));
-    return medical_record_ID;
-  }
-
-  // function Get_medical_record_ID_Bytes32(string composite_key) constant returns (bytes32) {
-  //   return ConvertTypes.StringToBytes32(cpk_S_ClaimRecord[composite_key].medical_record_ID);
+  // function ClaimRecord_row_hash(string composite_key) constant returns (bytes32) {
+  //   return _ClaimRecord.Get_row_hash(composite_key);
   // }
 
-  function ClaimRecord_eligible_benefit_amount(string composite_key) constant returns (uint) {
-    return _ClaimRecord.Get_eligible_benefit_amount(composite_key);
-  }
-
-  function ClaimRecord_claim_paid_TR_ID(string composite_key) constant returns (string) {
-    string memory claim_paid_TR_ID = ConvertTypes.Bytes32ToString(_ClaimRecord.Get_claim_paid_TR_ID_Bytes32(composite_key));
-    return claim_paid_TR_ID;
-  }
-
-  // function Get_claim_paid_TR_ID_Bytes32(string composite_key) constant returns (bytes32) {
-  //   return ConvertTypes.StringToBytes32(cpk_S_ClaimRecord[composite_key].claim_paid_TR_ID);
+  // function ClaimRecord_insured_person_ID(string composite_key) constant returns (string) {
+  //   string memory insured_person_ID = ConvertTypes.Bytes32ToString(_ClaimRecord.Get_insured_person_ID_Bytes32(composite_key));
+  //   return insured_person_ID;
   // }
 
-  function ClaimRecord_status_code(string composite_key) constant returns (uint) {
-    return _ClaimRecord.Get_status_code(composite_key);
-  }
-  // ^^^^^ 【理賠案件】^^^^^ 
+  // // function Get_insured_person_ID_Bytes32(string composite_key) constant returns (bytes32) {
+  // //   return ConvertTypes.StringToBytes32(cpk_S_ClaimRecord[composite_key].insured_person_ID);
+  // // }
+
+  // function ClaimRecord_medical_record_ID(string composite_key) constant returns (string) {
+  //   string memory medical_record_ID = ConvertTypes.Bytes32ToString(_ClaimRecord.Get_medical_record_ID_Bytes32(composite_key));
+  //   return medical_record_ID;
+  // }
+
+  // // function Get_medical_record_ID_Bytes32(string composite_key) constant returns (bytes32) {
+  // //   return ConvertTypes.StringToBytes32(cpk_S_ClaimRecord[composite_key].medical_record_ID);
+  // // }
+
+  // function ClaimRecord_eligible_benefit_amount(string composite_key) constant returns (uint) {
+  //   return _ClaimRecord.Get_eligible_benefit_amount(composite_key);
+  // }
+
+  // function ClaimRecord_claim_paid_TR_ID(string composite_key) constant returns (string) {
+  //   string memory claim_paid_TR_ID = ConvertTypes.Bytes32ToString(_ClaimRecord.Get_claim_paid_TR_ID_Bytes32(composite_key));
+  //   return claim_paid_TR_ID;
+  // }
+
+  // // function Get_claim_paid_TR_ID_Bytes32(string composite_key) constant returns (bytes32) {
+  // //   return ConvertTypes.StringToBytes32(cpk_S_ClaimRecord[composite_key].claim_paid_TR_ID);
+  // // }
+
+  // function ClaimRecord_status_code(string composite_key) constant returns (uint) {
+  //   return _ClaimRecord.Get_status_code(composite_key);
+  // }
+  // // ^^^^^ 【理賠案件】^^^^^ 
 }

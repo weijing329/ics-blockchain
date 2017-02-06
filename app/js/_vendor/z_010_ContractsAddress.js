@@ -39,13 +39,16 @@ var contract_names = [
   'ContractTerm',
   'MedicalRecord',
   'InsurancePolicy',
-  'ClaimRecord'
+  'ClaimRecord',
+  'CalculateBenefits'
 ];
 
 // 【重新載入合約位置】
 var reloadContractsAddress = function () {
   clearContractsAddress();
   appendContractsAddress('contract_name', 'contract_address');
+  appendContractsAddress();
+  appendContractsAddress('ContractsAddress', ContractsAddress.address);
   appendContractsAddress();
   contract_names.forEach(function (contract_name) {
     addToContractsAddress(contract_name);

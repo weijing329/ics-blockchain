@@ -10,6 +10,7 @@ import "insurance/ContractTerm.sol";
 import "insurance/MedicalRecord.sol";
 import "insurance/InsurancePolicy.sol";
 import "insurance/PolicyCalculation.sol";
+import "insurance/ClaimRecord.sol";
 
 contract CalculateBenefits {
 
@@ -19,6 +20,7 @@ contract CalculateBenefits {
   ContractTerm private _ContractTerm;
   MedicalRecord private _MedicalRecord;
   InsurancePolicy private _InsurancePolicy;
+  ClaimRecord private _ClaimRecord;
 
   address public h_ContractsAddress;
   address public h_ConcateCPK;
@@ -26,6 +28,7 @@ contract CalculateBenefits {
   address public h_ContractTerm;
   address public h_MedicalRecord;
   address public h_InsurancePolicy;
+  address public h_ClaimRecord;
 
   function CalculateBenefits(address contracts_address) {
     UpdateContractAddress(contracts_address);
@@ -63,6 +66,11 @@ contract CalculateBenefits {
     if (h_InsurancePolicy != 0x0) {
       _InsurancePolicy = InsurancePolicy(h_InsurancePolicy);
     }
+
+    h_ClaimRecord = _ContractsAddress.GetAddress('ClaimRecord');
+    if (h_ClaimRecord != 0x0) {
+      _ClaimRecord = ClaimRecord(h_ClaimRecord);
+    }
   }
 
   function ConcateEnrollmentCPK(string insured_person_ID, string insurance_policy_package_ID, string insurance_policy_ID) returns (string) {
@@ -77,32 +85,40 @@ contract CalculateBenefits {
     return contract_term_CPK;
   }
 
-  uint public daily_benefit_amount;
-  uint public policy_claimable_amount;
-  uint public hospital_days;
-  uint public fee;
-  uint public claim_adjustment;
+  function Get_insured_person_ID(string claim_record_ID) returns (string) {
+    bytes32 b_insured_person_ID = _ClaimRecord.Get_insured_person_ID_Bytes32(claim_record_ID);
+    string memory insured_person_ID = ConvertTypes.Bytes32ToString(b_insured_person_ID);
+    return insured_person_ID;
+  }
+
+  function Get_medical_record_ID(string claim_record_ID) returns (string) {
+    bytes32 b_medical_record_ID = _ClaimRecord.Get_medical_record_ID_Bytes32(claim_record_ID);
+    string memory medical_record_ID = ConvertTypes.Bytes32ToString(b_medical_record_ID);
+    return medical_record_ID;
+  }
+
   uint public result;
 
-  event e_CalculateBenefit(uint daily_benefit_amount, uint policy_claimable_amount, uint hospital_days, uint fee, uint claim_adjustment, uint result);
+  // return Decimal(19,4)x4
   function CalculateBenefit(string insured_person_ID, string insurance_policy_package_ID, string insurance_policy_ID, string medical_record_ID, string benefit_item_ID) returns (uint) {
     
+    // string memory insured_person_ID = Get_insured_person_ID(claim_record_ID); // nested too deep, removal variable
+    // string memory medical_record_ID = Get_medical_record_ID(claim_record_ID);
+
     string memory enrollment_CPK = ConcateEnrollmentCPK(insured_person_ID, insurance_policy_package_ID, insurance_policy_ID);
     string memory contract_term_CPK = ConcateContractTermCPK(insurance_policy_ID, benefit_item_ID);
 
-    daily_benefit_amount = _Enrollment.Get_daily_benefit_amount(enrollment_CPK);
-    policy_claimable_amount = _Enrollment.Get_policy_claimable_amount(enrollment_CPK);
-    hospital_days = _MedicalRecord.Get_hospital_days(medical_record_ID);
-    fee = _MedicalRecord.Get_fee(medical_record_ID);
-    claim_adjustment = _ContractTerm.Get_claim_adjustment(contract_term_CPK);
+    uint daily_benefit_amount = _Enrollment.Get_daily_benefit_amount(enrollment_CPK);
+    uint policy_claimable_amount = _Enrollment.Get_policy_claimable_amount(enrollment_CPK);
+    uint hospital_days = _MedicalRecord.Get_hospital_days(medical_record_ID);
+    uint fee = _MedicalRecord.Get_fee(medical_record_ID);
+    uint claim_adjustment = _ContractTerm.Get_claim_adjustment(contract_term_CPK);
 
     address h_policy_calculation = _InsurancePolicy.Get_contract_address(insurance_policy_ID);
     PolicyCalculation _PolicyCalculation;
     _PolicyCalculation = PolicyCalculation(h_policy_calculation);
     
     result = _PolicyCalculation.Calculate(daily_benefit_amount, policy_claimable_amount, hospital_days, fee, claim_adjustment);
-
-    e_CalculateBenefit(daily_benefit_amount, policy_claimable_amount, hospital_days, fee, claim_adjustment, result);
 
     return result;
   }
