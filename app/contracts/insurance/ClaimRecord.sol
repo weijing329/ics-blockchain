@@ -101,7 +101,7 @@ contract ClaimRecord is TableRowDataStorage {
   }
 
   // for other Contract
-  event e_SetStatusCode(bytes32 indexed row_CPK_hash, uint status_code);
+  event e_SetStatusCode(bytes32 indexed row_CPK_hash, string row_CPK, uint status_code);
   function Set_status_code(string row_CPK, uint status_code) {
     e_SetStatusCode(keccak256(row_CPK), status_code);
   }
