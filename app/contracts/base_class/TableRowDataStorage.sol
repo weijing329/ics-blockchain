@@ -37,6 +37,10 @@ contract TableRowDataStorage {
     return true;
   }
 
+  function DeleteRow(string row_CPK) public {
+    delete table_row_data_hash[row_CPK];
+  }
+
   function GetTableRowDataHash(string row_CPK) public constant returns (bytes32) {
     return table_row_data_hash[row_CPK];
   }

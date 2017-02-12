@@ -24,7 +24,7 @@ contract ClaimRecord is TableRowDataStorage {
   address public h_ContractsAddress;
   address public h_CalculateBenefits;
 
-  uint public small_benefit_cap;
+  uint public small_benefit_cap; // Int
 
   function SetSmalBenefitCap(uint _small_benefit_cap) {
     small_benefit_cap = _small_benefit_cap;
