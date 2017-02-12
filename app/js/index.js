@@ -35,4 +35,7 @@ $(document).ready(function () {
 
   // 【寫入理賠案件】
   ClaimRecordManager.Init();
+
+  // 【寫入轉帳記錄】
+  TransferRecordManager.Init();
 });
