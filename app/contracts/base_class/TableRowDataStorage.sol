@@ -1,5 +1,6 @@
 pragma solidity ^0.4.6;
 contract TableRowDataStorage {
+  uint num_row_CPKs = 0;
   string[] private row_CPKs;
 
   // lastest row data hash
@@ -12,7 +13,7 @@ contract TableRowDataStorage {
   event e_SetTableRowData(bytes32 indexed row_CPK_hash, string row_CPK, bytes32 row_data_hash);
   function SetTableRowData(string row_CPK, string row_data) internal {
     if (table_row_data_hash[row_CPK] == table_row_data_hash["EMPTY_MAPPING"]) {
-      row_CPKs.push(row_CPK);
+      InsertRowCPKs(row_CPK);
     }
 
     bytes32 row_CPK_hash = keccak256(row_CPK);
@@ -22,8 +23,24 @@ contract TableRowDataStorage {
     e_SetTableRowData(row_CPK_hash, row_CPK, row_data_hash);
   }
 
+  // reset PKs
+  function ClearRowCPKs() {
+    for (var i = 0; i < num_row_CPKs; i++) {
+      delete table_row_data_hash[row_CPKs[i]];
+    }
+
+    num_row_CPKs = 0;
+  }
+
+  function InsertRowCPKs(string row_CPK) {
+    if(num_row_CPKs == row_CPKs.length) {
+        row_CPKs.length += 1;
+    }
+    row_CPKs[num_row_CPKs++] = row_CPK;
+}
+
   function GetRowCount() public constant returns (uint) {
-    return row_CPKs.length;
+    return num_row_CPKs;
   }
 
   function GetRowKey(uint index) public constant returns (string) {
@@ -35,10 +52,6 @@ contract TableRowDataStorage {
       return false;
     }
     return true;
-  }
-
-  function DeleteRow(string row_CPK) public {
-    delete table_row_data_hash[row_CPK];
   }
 
   function GetTableRowDataHash(string row_CPK) public constant returns (bytes32) {
