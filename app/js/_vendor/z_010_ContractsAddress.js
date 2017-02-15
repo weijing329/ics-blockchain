@@ -40,7 +40,8 @@ var contract_names = [
   'MedicalRecord',
   'InsurancePolicy',
   'ClaimRecord',
-  'CalculateBenefits'
+  'CalculateBenefits',
+  'TransferRecord'
 ];
 
 // 【重新載入合約位置】
