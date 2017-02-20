@@ -1,6 +1,6 @@
 pragma solidity ^0.4.6;
 
-import "lib/maths.sol";
+import "000_lib/maths.sol";
 
 contract PolicyCalculation {
 

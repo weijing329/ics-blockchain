@@ -1,6 +1,6 @@
 pragma solidity ^0.4.6;
 
-import "base_class/TableRowDataStorage.sol";
+import "010_base_class/TableRowDataStorage.sol";
 
 contract Person is TableRowDataStorage {
   // row_CPK = Person.code

@@ -1,6 +1,6 @@
 pragma solidity ^0.4.6;
 
-import "insurance/PolicyCalculation.sol";
+import "040_insurance/PolicyCalculation.sol";
 
 contract PolicyCalculationType4 is PolicyCalculation {
 

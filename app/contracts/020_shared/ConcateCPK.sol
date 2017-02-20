@@ -1,7 +1,7 @@
 pragma solidity ^0.4.6;
 
-import "lib/strings.sol";
-import "lib/ConvertTypes.sol";
+import "000_lib/strings.sol";
+import "001_lib/ConvertTypes.sol";
 
 contract ConcateCPK {
   using strings for *;

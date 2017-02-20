@@ -6,9 +6,6 @@ $(document).ready(function () {
   // 【記錄合約位置】
   InitContractsAddress();
 
-  // 【政府共用資料】
-  GovernmentContractsManager.Init();
-
   // 【記錄自然人】
   PersonManager.Init();
 

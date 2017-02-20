@@ -1,6 +1,6 @@
 pragma solidity ^0.4.6;
 
-import "lib/strings.sol";
+import "000_lib/strings.sol";
 
 library ConvertTypes {
   using strings for *;

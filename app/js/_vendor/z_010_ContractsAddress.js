@@ -31,16 +31,12 @@ var addToContractsAddress = function (contract_name) {
 var contract_names = [
   'ConcateCPK',
   'Person',
-  'LegalEntity',
   'InternationInjuryAndDisease',
-  'BankAccount',
-  'Member',
   'Enrollment',
   'ContractTerm',
   'MedicalRecord',
   'InsurancePolicy',
   'ClaimRecord',
-  'CalculateBenefits',
   'TransferRecord'
 ];
 

@@ -183,9 +183,9 @@
       <hr>
       <h3> 保險公司 - 理賠案件 </h3>
       重新部署的時候要記得執行：</br>
-      CalculateBenefits.UpdateContractAddress(ContractsAddress.address, {gas: 4141592});</br>
+      先更新 ContractsAddress 的合約位置</br>
       ClaimRecord.SetContractAddress(ContractsAddress.address, {gas: 4141592});</br>
-      ClaimRecord.SetSmalBenefitCap(30000);</br>
+      ClaimRecord.SetSmalBenefitCap(100000);</br>
       <div class="panel panel-default">
         <div class="panel-heading">ClaimRecord.sol</div>
         <table class="table table-sm table-bordered table-striped ClaimRecord">

@@ -13,37 +13,9 @@
           
         ]
       },
-      "Bank": {
-        "args": [
-          
-        ]
-      },
-      "InsuranceCompany": {
-        "args": [
-          "$ContractsAddress"
-        ],
-        "gas": 4712388
-      },
-      "Government": {
-        "args": [
-          "$ContractsAddress"
-        ]
-      },
-      "CalculateBenefitType4": {
-        "args": [
-          "$ContractsAddress"
-        ],
-        "gas": 4712388
-      },
       "ClaimRecord": {
         "args": [
 
-        ],
-        "gas": 4712388
-      },
-      "CalculateBenefits": {
-        "args": [
-          "$ContractsAddress"
         ],
         "gas": 4712388
       }
