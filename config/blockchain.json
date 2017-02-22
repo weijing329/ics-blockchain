@@ -18,7 +18,7 @@
     "datadir": ".embark/development/datadir",
     "mineWhenNeeded": true,
     "nodiscover": true,
-    "rpcHost": "localhost",
+    "rpcHost": "0.0.0.0",
     "rpcPort": 8545,
     "rpcCorsDomain": "http://localhost:8000,http://blockchainpoc.ddns.net:8080",
     "account": {
