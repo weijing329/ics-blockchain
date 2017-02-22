@@ -2,6 +2,8 @@
   "default": {
     "gas": "auto",
     "contracts": {
+      "TableRowDataStorage": {
+      },
       "Enrollment": {
         "args": [
           
