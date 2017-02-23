@@ -2,19 +2,6 @@
   "default": {
     "gas": "auto",
     "contracts": {
-      "TableRowDataStorage": {
-      },
-      "Enrollment": {
-        "args": [
-          
-        ],
-        "gas": "auto"
-      },
-      "ContractsAddress": {
-        "args": [
-          
-        ]
-      },
       "ClaimRecord": {
         "args": [
 

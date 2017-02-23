@@ -1,4 +1,4 @@
-pragma solidity ^0.4.6;
+pragma solidity ^0.4.8;
 
 import "010_base_class/TableRowDataStorage.sol";
 

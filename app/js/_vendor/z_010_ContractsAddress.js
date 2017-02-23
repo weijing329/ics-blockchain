@@ -54,47 +54,11 @@ var reloadContractsAddress = function () {
 
 var InitContractsAddress = function () {
   reloadContractsAddress();
+  
   $("#set_contract_address button.set_contract_address").click(function () {
-    addBoldToLog('[開始] 記錄合約位置');
-
-    var contract_name = $("#set_contract_address .contract_name").val();
-    var contract_address = $("#set_contract_address .contract_address").val();
-
-    var start_date = moment();
-    addMomentToLog(start_date);
-
-    addCodeToLog('contract_name = ' + contract_name);
-    addCodeToLog('contract_address = ' + contract_address);
-    addCodeToLog("ContractsAddress.SetAddress(contract_name, contract_address);");
-    addBarToLog();
-
-    var e_SetAddress_listener = ContractsAddress._originalContractObject.e_SetAddress({
-      contract_name: web3.sha3(contract_name)
+    contract_names.forEach(function (contract_name) {
+      ContractsAddress.SetAddress(contract_name, window[contract_name].address);
     });
-    e_SetAddress_listener.watch(function (err, logs) {
-      if (!err) {
-        addBoldToLog('[完成] 記錄合約位置');
-
-        var end_date = moment();
-        addMomentToLog(end_date);
-        var diff_microseconds = end_date.diff(start_date);
-        addToLog('time span: ' + diff_microseconds + ' ms');
-
-        addJsonToLog(logs);
-        addBarToLog();
-
-        var existing_item_index = contract_names.findIndex(function (item_value) {
-          return item_value == contract_name;
-        });
-        if (existing_item_index == -1) {
-          contract_names.push(contract_name);
-        }
-        reloadContractsAddress();
-      } else {
-        addJsonToLog(err);
-      }
-      e_SetAddress_listener.stopWatching();
-    });
-    ContractsAddress.SetAddress(contract_name, contract_address);
+    reloadContractsAddress();
   });
 };

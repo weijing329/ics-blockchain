@@ -55,9 +55,7 @@
       <div class="contracts_address">
       </div>
       <div id="set_contract_address" class="form-group form-inline">
-        <textarea cols="40" rows="3" class="contract_name form-control" placeholder="contract_name"></textarea>
-        <textarea cols="40" rows="3" class="contract_address form-control" placeholder="contract_address"></textarea>
-        <button class="set_contract_address btn btn-primary">記錄合約位置</button>
+        <button class="set_contract_address btn btn-primary">更新合約位置</button>
         <p>需要mining</p>
       </div>
     </div>
@@ -169,6 +167,14 @@
         <p>需要mining</p>
       </div>
       <hr>-->
+
+      <h3> 理賠計算邏輯的合約位置 </h3>
+      若 PolicyCalculationType*.address 有變的話要更新 InsurancePolicy 【保險條款】的對應資料。<br/>
+      <hr>
+      <div class="PolicyCalculationTypes">
+      </div>
+      <hr>
+
       <h3> 保險公司 - 保險契約 </h3>
       <div class="panel panel-default">
         <div class="panel-heading">InsurancePolicy.sol</div>
@@ -188,7 +194,7 @@
       先更新 ContractsAddress 的合約位置<br/>
       ClaimRecord.SetContractAddress(ContractsAddress.address, {gas: 4141592});<br/>
       ClaimRecord.SetSmalBenefitCap(100000);<br/>
-      若 PolicyCalculationType4.address 有變還要更新 InsurancePolicy 【保險條款】的內容。<br/>
+
       <div class="panel panel-default">
         <div class="panel-heading">ClaimRecord.sol</div>
         <table class="table table-sm table-bordered table-striped ClaimRecord">

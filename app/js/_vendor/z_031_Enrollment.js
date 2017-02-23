@@ -57,7 +57,7 @@ var EnrollmentManager = (function () {
     var html = '<tr data-position="' + index + '">';
     html = html + '<th scope="row">' + index + '</th>';
     html = html + '<td>' + row_CPK + '</td>';
-    html = html + '<td style="word-wrap: break-word;min-width: 160px;max-width: 160px;">' + row_data + '</td>';
+    html = html + '<td style="word-wrap: break-word;min-width: 160px;max-width: 160px;">' + syntaxHighlight(row_data) + '</td>';
     html = html + '<td>' + daily_benefit_amount + '</td>';
     html = html + '<td>' + policy_claimable_amount + '</td>';
     html = html + '</tr>';

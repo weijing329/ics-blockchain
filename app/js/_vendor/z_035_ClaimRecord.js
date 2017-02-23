@@ -65,7 +65,7 @@ var ClaimRecordManager = (function () {
     var html = '<tr data-position="' + index + '">';
     html = html + '<th scope="row">' + index + '</th>';
     html = html + '<td>' + row_CPK + '</td>';
-    html = html + '<td style="word-wrap: break-word;min-width: 160px;max-width: 160px;">' + row_data + '</td>';
+    html = html + '<td style="word-wrap: break-word;min-width: 160px;max-width: 160px;">' + syntaxHighlight(row_data) + '</td>';
     html = html + '<td>' + insured_person_ID + '</td>';
     html = html + '<td>' + medical_record_ID + '</td>';
     html = html + '<td>' + eligible_benefit_amount + '</td>';

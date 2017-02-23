@@ -35,4 +35,6 @@ $(document).ready(function () {
 
   // 【寫入轉帳記錄】
   TransferRecordManager.Init();
+
+  PolicyCalculationManager.Init();
 });
