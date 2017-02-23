@@ -1,11 +1,11 @@
 ///////////////////////////////////////////////////////////////////////////////
-// 寫入保險契約 UI 功能
+// 寫入保險條款 UI 功能
 
 var InsurancePolicyManager = (function () {
   /////////////////////////////////////////////////////////////////////////////////////////////////
   // Private
 
-  var function_name = '寫入保險契約';
+  var function_name = '寫入保險條款';
   var ContractObject = InsurancePolicy._originalContractObject;
   var ContractObject_name = 'InsurancePolicy';
   var div_ID = 'SetInsurancePolicy';
@@ -39,9 +39,9 @@ var InsurancePolicyManager = (function () {
   function AppendTableHead() {
     var html = '<tr>';
     html = html + '<th>#</th>';
-    html = html + '<th>row_CPK<br>保險契約ID</th>';
+    html = html + '<th>row_CPK<br>保險條款ID</th>';
     html = html + '<th>row_data</th>';
-    html = html + '<th>contract_address<br>契約條款智能合約地址</th>';
+    html = html + '<th>contract_address<br>保險條款智能合約地址</th>';
     html = html + '</tr>';
 
     Table().append(html);

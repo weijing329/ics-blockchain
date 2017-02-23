@@ -107,22 +107,7 @@
         <p>需要mining</p>
       </div>
       <hr>-->
-      <h3> 保險公司 - 註冊保戶保單 </h3>
-      <div class="panel panel-default">
-        <div class="panel-heading">Enrollment.sol</div>
-        <table class="table table-sm table-bordered table-striped Enrollment">
-        </table>
-      </div>
-      <div id="SetEnrollment" class="form-group form-inline">
-        <textarea cols="20" rows="3" class="row_CPK form-control" placeholder="row_CPK"></textarea>
-        <textarea cols="40" rows="3" class="row_data form-control" placeholder="row_data"></textarea>
-        <textarea cols="30" rows="3" class="daily_benefit_amount form-control" placeholder="daily_benefit_amount"></textarea>
-        <textarea cols="30" rows="3" class="policy_claimable_amount form-control" placeholder="policy_claimable_amount"></textarea>
-        <button class="SetEnrollment btn btn-primary">註冊保戶保單</button>
-        <p>需要mining</p>
-      </div>
-      <hr>
-      <h3> 保險公司 - 契約內容 </h3>
+      <h3> 保險公司 - 條款內容 </h3>
       <div class="panel panel-default">
         <div class="panel-heading">ContractTerm.sol</div>
         <table class="table table-sm table-bordered table-striped ContractTerm">
@@ -132,22 +117,7 @@
         <textarea cols="20" rows="3" class="row_CPK form-control" placeholder="row_CPK"></textarea>
         <textarea cols="40" rows="3" class="row_data form-control" placeholder="row_data"></textarea>
         <textarea cols="40" rows="3" class="claim_adjustment form-control" placeholder="claim_adjustment"></textarea>
-        <button class="SetContractTerm btn btn-primary">寫入契約內容</button>
-        <p>需要mining</p>
-      </div>
-      <hr>
-      <h3> 保險公司／特約醫院 - 醫療記錄 </h3>
-      <div class="panel panel-default">
-        <div class="panel-heading">MedicalRecord.sol</div>
-        <table class="table table-sm table-bordered table-striped MedicalRecord">
-        </table>
-      </div>
-      <div id="SetMedicalRecord" class="form-group form-inline">
-        <textarea cols="20" rows="3" class="row_CPK form-control" placeholder="row_CPK"></textarea>
-        <textarea cols="40" rows="3" class="row_data form-control" placeholder="row_data"></textarea>
-        <textarea cols="40" rows="3" class="hospital_days form-control" placeholder="hospital_days"></textarea>
-        <textarea cols="40" rows="3" class="fee form-control" placeholder="fee"></textarea>
-        <button class="SetMedicalRecord btn btn-primary">寫入醫療記錄</button>
+        <button class="SetContractTerm btn btn-primary">寫入條款內容</button>
         <p>需要mining</p>
       </div>
       <hr>
@@ -175,7 +145,7 @@
       </div>
       <hr>
 
-      <h3> 保險公司 - 保險契約 </h3>
+      <h3> 保險公司 - 保險條款 </h3>
       <div class="panel panel-default">
         <div class="panel-heading">InsurancePolicy.sol</div>
         <table class="table table-sm table-bordered table-striped InsurancePolicy">
@@ -185,11 +155,40 @@
         <textarea cols="20" rows="3" class="row_CPK form-control" placeholder="row_CPK"></textarea>
         <textarea cols="40" rows="3" class="row_data form-control" placeholder="row_data"></textarea>
         <textarea cols="40" rows="3" class="contract_address form-control" placeholder="contract_address"></textarea>
-        <button class="SetInsurancePolicy btn btn-primary">寫入保險契約</button>
+        <button class="SetInsurancePolicy btn btn-primary">寫入保險條款</button>
         <p>需要mining</p>
       </div>
       <hr>
-      <h3> 保險公司 - 理賠案件 </h3>
+      <h3> 保險公司 - 註冊保單 </h3>
+      <div class="panel panel-default">
+        <div class="panel-heading">Enrollment.sol</div>
+        <table class="table table-sm table-bordered table-striped Enrollment">
+        </table>
+      </div>
+      <div id="SetEnrollment" class="form-group form-inline">
+        <textarea cols="20" rows="3" class="row_CPK form-control" placeholder="row_CPK"></textarea>
+        <textarea cols="40" rows="3" class="row_data form-control" placeholder="row_data"></textarea>
+        <textarea cols="30" rows="3" class="daily_benefit_amount form-control" placeholder="daily_benefit_amount"></textarea>
+        <textarea cols="30" rows="3" class="policy_claimable_amount form-control" placeholder="policy_claimable_amount"></textarea>
+        <button class="SetEnrollment btn btn-primary">註冊保單</button>
+        <p>需要mining</p>
+      </div>
+      <hr>
+      <h3> 保險公司／特約醫院 - 醫療記錄 </h3>
+      <div class="panel panel-default">
+        <div class="panel-heading">MedicalRecord.sol</div>
+        <table class="table table-sm table-bordered table-striped MedicalRecord">
+        </table>
+      </div>
+      <div id="SetMedicalRecord" class="form-group form-inline">
+        <textarea cols="20" rows="3" class="row_CPK form-control" placeholder="row_CPK"></textarea>
+        <textarea cols="40" rows="3" class="row_data form-control" placeholder="row_data"></textarea>
+        <textarea cols="40" rows="3" class="hospital_days form-control" placeholder="hospital_days"></textarea>
+        <textarea cols="40" rows="3" class="fee form-control" placeholder="fee"></textarea>
+        <button class="SetMedicalRecord btn btn-primary">寫入醫療記錄</button>
+        <p>需要mining</p>
+      </div>
+      <hr>      <h3> 保險公司 - 理賠案件 </h3>
       重新部署的時候要記得執行：<br/>
       先更新 ContractsAddress 的合約位置<br/>
       ClaimRecord.SetContractAddress(ContractsAddress.address, {gas: 4141592});<br/>

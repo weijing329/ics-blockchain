@@ -1,11 +1,11 @@
 ///////////////////////////////////////////////////////////////////////////////
-// 契約內容 UI 功能
+// 條款內容 UI 功能
 
 var ContractTermManager = (function () {
   /////////////////////////////////////////////////////////////////////////////////////////////////
   // Private
 
-  var function_name = '寫入契約內容';
+  var function_name = '寫入條款內容';
   var ContractObject = ContractTerm._originalContractObject;
   var ContractObject_name = 'ContractTerm';
   var div_ID = 'SetContractTerm';
@@ -39,9 +39,9 @@ var ContractTermManager = (function () {
   function AppendTableHead() {
     var html = '<tr>';
     html = html + '<th>#</th>';
-    html = html + '<th>row_CPK<br>保險契約ID | 給付項目ID</th>';
+    html = html + '<th>row_CPK<br>保險條款ID | 手術給付項目ID</th>';
     html = html + '<th>row_data</th>';
-    html = html + '<th>claim_adjustment : Decimal(19,9)x9<br>理賠倍率</th>';
+    html = html + '<th>claim_adjustment : Decimal(19,9)x9<br>手術保險金倍率</th>';
     html = html + '</tr>';
 
     Table().append(html);

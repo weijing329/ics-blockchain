@@ -5,7 +5,7 @@ var EnrollmentManager = (function () {
   /////////////////////////////////////////////////////////////////////////////////////////////////
   // Private
 
-  var function_name = '註冊保戶保單';
+  var function_name = '註冊保單';
   var ContractObject = Enrollment._originalContractObject;
   var ContractObject_name = 'Enrollment';
   var div_ID = 'SetEnrollment';
@@ -39,10 +39,10 @@ var EnrollmentManager = (function () {
   function AppendTableHead() {
     var html = '<tr>';
     html = html + '<th>#</th>';
-    html = html + '<th>row_CPK<br>被保險人ID | 保單ID | 保險契約ID</th>';
+    html = html + '<th>row_CPK<br>被保險人ID | 保單ID | 保險條款ID</th>';
     html = html + '<th>row_data</th>';
     html = html + '<th>daily_benefit_amount : Int<br>日額保險金</th>';
-    html = html + '<th>policy_claimable_amount : Int<br>保險契約可理賠額度</th>';
+    html = html + '<th>policy_claimable_amount : Int<br>保險金給付金額上限</th>';
     html = html + '</tr>';
 
     Table().append(html);
